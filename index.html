@@ -9,7 +9,8 @@
     :root {
       --bg: #040612;
       --bg-alt: #070918;
-      --card: #090b1d;
+      --card-dark: #050816;
+      --card-light: #0c1024;
       --text: #e6e9f4;
       --muted: #8a93ad;
       --accent: #5fa8ff;
@@ -53,23 +54,18 @@
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0.55rem 1rem;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
     }
 
-    .logo-mini {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.25);
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
     }
 
-    .logo-mini img { width: 100%; height: 100%; object-fit: cover; }
-
-    nav { justify-self: center; }
     nav ul {
       display: flex;
       gap: 0.9rem;
@@ -87,7 +83,7 @@
       display: flex;
       gap: 0.6rem;
       align-items: center;
-      justify-self: end;
+      justify-content: flex-end;
     }
 
     .lang-toggle {
@@ -101,21 +97,6 @@
       cursor: pointer;
     }
     .lang-toggle strong { color: var(--text); }
-
-    .btn-merch-header {
-      background: transparent;
-      border-radius: 999px;
-      padding: 0.3rem 1rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      border: 1px solid rgba(255,255,255,0.5);
-      color: var(--text);
-    }
-    .btn-merch-header:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
 
     /* MAIN */
     main {
@@ -135,7 +116,9 @@
     }
 
     .card {
-      background: var(--card);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.04), transparent 55%),
+        linear-gradient(135deg, var(--card-dark), var(--card-light));
       border-radius: var(--radius);
       border: 1px solid var(--border);
       padding: 1.6rem;
@@ -242,7 +225,7 @@
       }
     }
 
-    /* BIO, MUSIC, ETC. */
+    /* GENERIC */
     .card p { margin-top: 0; }
 
     .list-links {
@@ -261,7 +244,9 @@
       display: grid;
       grid-template-columns: 160px 1fr;
       gap: 1rem;
-      background: #070919;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.03), transparent 55%),
+        linear-gradient(135deg, #050816, #090d22);
       border-radius: 16px;
       border: 1px solid var(--border);
       padding: 0.8rem;
@@ -289,7 +274,7 @@
 
     .video-info-title {
       font-size: 1rem;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.1rem;
     }
 
     .video-info-meta {
@@ -349,12 +334,14 @@
 
     @media(max-width: 760px) {
       .nav-inner {
-        grid-template-columns: auto auto;
-        grid-template-rows: auto auto;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       nav {
-        grid-column: 1 / -1;
-        justify-self: center;
+        order: 2;
+      }
+      .nav-actions {
+        order: 3;
       }
     }
   </style>
@@ -364,7 +351,7 @@
 
 <header>
   <div class="nav-inner">
-    <div class="logo-mini"><img src="logo_sa_01.png" alt="Logo September Again mini"></div>
+    <div></div> <!-- vide pour garder un peu d'air à gauche -->
 
     <nav>
       <ul>
@@ -381,7 +368,6 @@
         <span class="fr"><strong>FR</strong> / EN</span>
         <span class="en">FR / <strong>EN</strong></span>
       </button>
-      <a href="https://septemberagain.bandcamp.com/merch" class="btn-merch-header" target="_blank">Merch</a>
     </div>
   </div>
 </header>
@@ -515,8 +501,8 @@
     </div>
     <div class="card">
       <p style="color:var(--muted); font-size:0.9rem; margin-top:0;">
-        <span class="fr">Quelques extraits du visual album&nbsp;:</span>
-        <span class="en">A few excerpts from the visual album:</span>
+        <span class="fr">Quelques clips :</span>
+        <span class="en">A few videos:</span>
       </p>
 
       <div class="video-grid">
@@ -526,10 +512,6 @@
             <div class="video-thumb" style="background-image:url('thumb_InWhichIFade.png');"></div>
             <div>
               <div class="video-info-title">In Which I Fade</div>
-              <div class="video-info-meta">
-                <span class="fr">Clip officiel – Seven Years</span>
-                <span class="en">Official music video – Seven Years</span>
-              </div>
             </div>
           </a>
         </div>
@@ -539,10 +521,6 @@
             <div class="video-thumb" style="background-image:url('thumb_mirrors.png');"></div>
             <div>
               <div class="video-info-title">Mirrors</div>
-              <div class="video-info-meta">
-                <span class="fr">Clip officiel</span>
-                <span class="en">Official music video</span>
-              </div>
             </div>
           </a>
         </div>
@@ -552,10 +530,6 @@
             <div class="video-thumb" style="background-image:url('thumb_DistortedNSweet.png');"></div>
             <div>
               <div class="video-info-title">Distorted and Sweet</div>
-              <div class="video-info-meta">
-                <span class="fr">Clip officiel</span>
-                <span class="en">Official music video</span>
-              </div>
             </div>
           </a>
         </div>
@@ -565,19 +539,18 @@
             <div class="video-thumb" style="background-image:url('thumb_twisted.png');"></div>
             <div>
               <div class="video-info-title">Twisted</div>
-              <div class="video-info-meta">
-                <span class="fr">Clip officiel</span>
-                <span class="en">Official music video</span>
-              </div>
             </div>
           </a>
         </div>
 
       </div>
 
-      <p style="margin-top:1.2rem; font-size:0.85rem; color:var(--muted);">
-        YouTube · <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">youtube.com/c/septemberagainsa</a>
-      </p>
+      <div style="margin-top:1.3rem;">
+        <a class="btn" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
+          <span class="fr">Chaîne YouTube</span>
+          <span class="en">YouTube channel</span>
+        </a>
+      </div>
     </div>
   </section>
 
