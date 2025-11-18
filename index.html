@@ -7,12 +7,13 @@
 
   <style>
     :root {
-      --bg: #03040a;
-      --bg2: #050716;
-      --text: #e7e9ef;
-      --muted: #7f8aa4;
+      --bg: #040612;
+      --bg-alt: #070918;
+      --card: #090b1d;
+      --text: #e6e9f4;
+      --muted: #8a93ad;
       --accent: #5fa8ff;
-      --border: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.14);
       --radius: 20px;
       --max-width: 1150px;
     }
@@ -21,16 +22,18 @@
 
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top, #1b2139 0, #040612 55%),
+        radial-gradient(circle at bottom, #050715 0, #040612 65%);
       color: var(--text);
       font-family: system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     a { color: var(--accent); text-decoration: none; }
-    a:hover { opacity: 0.8; }
+    a:hover { opacity: 0.9; }
 
-    /* Language switch */
+    /* Lang switch */
     .fr { display: inline; }
     .en { display: none; }
     body.lang-en .fr { display: none; }
@@ -41,15 +44,15 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(3,4,12,0.92);
+      background: rgba(4,6,18,0.96);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
       max-width: var(--max-width);
-      margin: auto;
-      padding: 0.6rem 1rem;
+      margin: 0 auto;
+      padding: 0.55rem 1rem;
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
@@ -66,17 +69,17 @@
 
     .logo-mini img { width: 100%; height: 100%; object-fit: cover; }
 
+    nav { justify-self: center; }
     nav ul {
       display: flex;
-      gap: 1rem;
+      gap: 0.9rem;
       list-style: none;
       padding: 0;
       margin: 0;
       text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
     }
-
     nav a { color: var(--muted); }
     nav a:hover { color: var(--text); }
 
@@ -84,62 +87,69 @@
       display: flex;
       gap: 0.6rem;
       align-items: center;
+      justify-self: end;
     }
 
     .lang-toggle {
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 0.25rem 0.75rem;
+      padding: 0.25rem 0.7rem;
       font-size: 0.7rem;
       text-transform: uppercase;
       color: var(--muted);
       cursor: pointer;
     }
+    .lang-toggle strong { color: var(--text); }
 
-    .btn-merch {
+    .btn-merch-header {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.5);
       border-radius: 999px;
       padding: 0.3rem 1rem;
-      color: var(--text);
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.16em;
+      border: 1px solid rgba(255,255,255,0.5);
+      color: var(--text);
+    }
+    .btn-merch-header:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* MAIN */
     main {
       max-width: var(--max-width);
-      margin: auto;
+      margin: 0 auto;
       padding: 2rem 1rem 4rem;
     }
 
     section { margin-bottom: 3rem; }
 
-    .card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
     .section-label {
       text-transform: uppercase;
       font-size: 0.75rem;
       color: var(--muted);
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       margin-bottom: 0.6rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.85);
+      position: relative;
+      overflow: hidden;
     }
 
     /* HERO */
     .hero {
-      text-align: center;
-      padding: 3rem 1rem;
+      display: grid;
+      gap: 1.6rem;
+      min-height: 260px;
       position: relative;
-      overflow: hidden;
     }
 
     .hero-bg {
@@ -147,62 +157,98 @@
       inset: 0;
       background: url("hero_01.png") center/cover no-repeat;
       opacity: 0.35;
-      filter: brightness(0.5) saturate(0.7);
+      filter: brightness(0.55) saturate(0.75);
       z-index: -2;
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(3,4,12,0.8), rgba(3,4,12,0.95));
+      background: linear-gradient(to bottom right, rgba(4,6,18,0.9), rgba(4,6,18,0.96));
       z-index: -1;
     }
 
+    .hero-left,
+    .hero-right { position: relative; }
+
     .hero-logo {
-      width: clamp(180px, 40%, 380px);
-      margin: auto;
+      width: clamp(180px, 40%, 360px);
+      max-width: 100%;
       display: block;
-      filter: drop-shadow(0 0 12px rgba(0,0,0,0.8));
+      margin: 0 auto 0.9rem;
+      filter: drop-shadow(0 0 14px rgba(0,0,0,0.9));
     }
 
     .tagline {
+      text-align: center;
       font-size: 0.7rem;
-      margin-top: 0.8rem;
       color: var(--muted);
-      letter-spacing: 0.24em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      margin-bottom: 0.7rem;
     }
 
     .hero-sub {
-      max-width: 600px;
-      margin: 1rem auto;
-      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
       font-size: 0.9rem;
+      color: var(--muted);
     }
 
     .hero-ctas {
+      margin-top: 1.2rem;
       display: flex;
-      gap: 0.8rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 1.2rem;
+      gap: 0.8rem;
     }
 
     .btn {
       padding: 0.6rem 1.4rem;
       border-radius: 999px;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
       border: 1px solid var(--border);
+      background: rgba(6,8,22,0.95);
       color: var(--text);
-      background: rgba(10,12,22,0.8);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .btn-primary {
       background: var(--accent);
-      color: #041021;
+      color: #02060f;
       border-color: transparent;
+    }
+
+    .hero-right .section-label {
+      margin-bottom: 0.3rem;
+      text-align: left;
+    }
+
+    .hero-about {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media(min-width: 820px) {
+      .hero {
+        grid-template-columns: 3fr 2fr;
+        align-items: center;
+      }
+    }
+
+    /* BIO, MUSIC, ETC. */
+    .card p { margin-top: 0; }
+
+    .list-links {
+      display: grid;
+      gap: 0.3rem;
+      font-size: 0.9rem;
     }
 
     /* CLIPS */
@@ -215,9 +261,9 @@
       display: grid;
       grid-template-columns: 160px 1fr;
       gap: 1rem;
-      background: #080b16;
-      border: 1px solid var(--border);
+      background: #070919;
       border-radius: 16px;
+      border: 1px solid var(--border);
       padding: 0.8rem;
       align-items: center;
     }
@@ -236,8 +282,8 @@
       position: absolute;
       bottom: 6px;
       right: 10px;
-      color: rgba(255,255,255,0.9);
       font-size: 1.6rem;
+      color: rgba(255,255,255,0.92);
       text-shadow: 0 0 8px #000;
     }
 
@@ -251,8 +297,38 @@
       color: var(--muted);
     }
 
-    @media(max-width:720px) {
+    .video-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .video-card a:hover .video-info-title { text-decoration: underline; }
+
+    @media(max-width: 720px) {
       .video-card { grid-template-columns: 1fr; }
+    }
+
+    /* EPK */
+    .epk-grid {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .epk-thumb {
+      aspect-ratio: 3/4;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+    }
+
+    .epk-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
     }
 
     /* FOOTER */
@@ -262,13 +338,24 @@
       color: var(--muted);
       border-top: 1px solid var(--border);
       margin-top: 3rem;
-      position: relative;
     }
 
     .footer-logo {
       width: 200px;
-      opacity: 0.07;
-      margin-bottom: 1rem;
+      opacity: 0.08;
+      display: block;
+      margin: 0 auto 0.6rem;
+    }
+
+    @media(max-width: 760px) {
+      .nav-inner {
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+      }
+      nav {
+        grid-column: 1 / -1;
+        justify-self: center;
+      }
     }
   </style>
 </head>
@@ -277,20 +364,24 @@
 
 <header>
   <div class="nav-inner">
-    <div class="logo-mini"><img src="logo_sa_01.png"></div>
+    <div class="logo-mini"><img src="logo_sa_01.png" alt="Logo September Again mini"></div>
 
     <nav>
       <ul>
         <li><a href="#bio">Bio</a></li>
-        <li><a href="#music">Musique</a></li>
-        <li><a href="#videos">Clips</a></li>
+        <li><a href="#music"><span class="fr">Musique</span><span class="en">Music</span></a></li>
+        <li><a href="#videos"><span class="fr">Clips</span><span class="en">Videos</span></a></li>
         <li><a href="#epk">EPK</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
 
     <div class="nav-actions">
-      <button id="langToggle" class="lang-toggle"><span class="fr"><strong>FR</strong>/EN</span><span class="en">FR/<strong>EN</strong></span></button>
-      <a href="https://septemberagain.bandcamp.com/merch" class="btn-merch" target="_blank">Merch</a>
+      <button id="langToggle" class="lang-toggle">
+        <span class="fr"><strong>FR</strong> / EN</span>
+        <span class="en">FR / <strong>EN</strong></span>
+      </button>
+      <a href="https://septemberagain.bandcamp.com/merch" class="btn-merch-header" target="_blank">Merch</a>
     </div>
   </div>
 </header>
@@ -298,124 +389,268 @@
 <main>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
+  <section>
+    <div class="card hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
 
-    <img src="logo_sa_01.png" class="hero-logo" alt="September Again logo">
+      <div class="hero-left">
+        <img src="logo_sa_01.png" class="hero-logo" alt="September Again logo">
 
-    <div class="tagline">
-      <span class="fr">Alternative Rock / Metal – France</span>
-      <span class="en">Alternative Rock / Metal – France</span>
-    </div>
+        <div class="tagline">
+          <span class="fr">Alternative Rock / Metal – France</span>
+          <span class="en">Alternative Rock / Metal – France</span>
+        </div>
 
-    <p class="hero-sub">
-      <span class="fr">Rock / metal alternatif aux accents cinématographiques. Riffs lourds, voix fragiles et atmosphères électroniques.</span>
-      <span class="en">Cinematic alternative rock/metal blending heavy riffs, fragile vocals and electronic atmospheres.</span>
-    </p>
+        <p class="hero-sub">
+          <span class="fr">
+            Groupe de rock / metal alternatif cinématographique&nbsp;: riffs lourds, voix fragiles
+            et atmosphères électroniques se mélangent pour créer de véritables petits films sonores.
+          </span>
+          <span class="en">
+            A cinematic alternative rock / metal band blending heavy riffs, fragile vocals
+            and electronic atmospheres into short emotional films.
+          </span>
+        </p>
 
-    <div class="hero-ctas">
-      <a class="btn-primary btn" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
-        <span class="fr">Dernier clip</span>
-        <span class="en">Latest video</span>
-      </a>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
+            <span class="fr">Dernier clip</span>
+            <span class="en">Latest video</span>
+          </a>
+          <a class="btn" href="https://septemberagain.bandcamp.com/merch" target="_blank">Merch</a>
+          <a class="btn" href="#epk">
+            <span class="fr">EPK</span>
+            <span class="en">EPK</span>
+          </a>
+        </div>
+      </div>
 
-      <a class="btn" href="https://septemberagain.bandcamp.com/merch" target="_blank">Merch</a>
-
-      <a class="btn" href="#epk">
-        <span class="fr">EPK</span><span class="en">EPK</span>
-      </a>
+      <div class="hero-right">
+        <div class="section-label">
+          <span class="fr">À propos · Seven Years</span>
+          <span class="en">About · Seven Years</span>
+        </div>
+        <p class="hero-about">
+          <span class="fr">
+            <strong>Seven Years</strong> est le nouvel album-concept de September Again, prévu pour le
+            <strong>7 septembre 2025</strong>. Douze titres, douze films&nbsp;: chaque morceau devient un
+            court-métrage, pensé comme un chapitre d’un même récit sur la perte de contrôle, la catharsis
+            et la reconstruction.
+          </span>
+          <span class="en">
+            <strong>Seven Years</strong> is the new concept album by September Again, set for release on
+            <strong>September 7th, 2025</strong>. Twelve tracks, twelve films: each song becomes a short movie,
+            another chapter in a continuous story about losing control, catharsis and rebuilding.
+          </span>
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- BIO -->
   <section id="bio">
-    <div class="section-label">Bio</div>
+    <div class="section-label">
+      <span class="fr">Biographie</span>
+      <span class="en">Biography</span>
+    </div>
     <div class="card">
-      <p>Né en Haute-Savoie, September Again développe…  
-      *(bio que tu avais déjà validée — je peux la réajuster si tu veux)*</p>
+      <p>
+        <span class="fr">
+          Né en Haute-Savoie, September Again développe depuis plusieurs années un rock alternatif teinté de metal,
+          de trip-hop et d’ambient. Après un premier EP, <em>Insomniac</em>, le groupe affine son identité sur
+          <em>From Nothing to Nowhere</em>, un album où les guitares denses se mêlent à des nappes électroniques
+          et à des voix habitées, entre tension et fragilité.
+        </span>
+        <span class="en">
+          Born in Haute-Savoie, France, September Again has been shaping a blend of alternative rock, metal,
+          trip-hop and ambient for several years. After a first EP, <em>Insomniac</em>, the band refined its identity
+          on <em>From Nothing to Nowhere</em>, where dense guitars collide with electronic layers and vulnerable vocals,
+          constantly oscillating between tension and fragility.
+        </span>
+      </p>
+      <p style="color:var(--muted); margin-bottom:0;">
+        <span class="fr">
+          Avec <strong>Seven Years</strong>, le groupe pousse encore plus loin son approche cinématographique&nbsp;:
+          chaque titre devient un court-métrage, réalisé et monté par le groupe lui-même. Image et son sont pensés
+          au même niveau, comme un seul langage pour raconter l’ascenseur émotionnel qui secoue, casse les mots
+          et force à se réinventer.
+        </span>
+        <span class="en">
+          With <strong>Seven Years</strong>, the band takes its cinematic approach even further:
+          every song becomes a short film, directed and edited by the band. Sound and image are treated as one
+          language to tell the story of an emotional roller coaster that shakes you to the core, breaks words apart
+          and forces you to rebuild yourself.
+        </span>
+      </p>
     </div>
   </section>
 
   <!-- MUSIC -->
   <section id="music">
-    <div class="section-label">Écouter</div>
+    <div class="section-label">
+      <span class="fr">Écouter</span>
+      <span class="en">Listen</span>
+    </div>
     <div class="card">
-      <p>Disponible sur toutes les plateformes :</p>
-      <p><a href="https://septemberagain.bandcamp.com/music">Bandcamp</a> · <a href="https://music.apple.com/fr/artist/september-again/1217780116">Apple Music</a> · etc.</p>
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;">
+        <span class="fr">September Again est disponible sur les principales plateformes&nbsp;:</span>
+        <span class="en">September Again is available on major platforms:</span>
+      </p>
+      <div class="list-links">
+        <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
+        <a href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
+        <a href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
+        <a href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
+        <a href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
+      </div>
     </div>
   </section>
 
   <!-- VIDEOS -->
   <section id="videos">
-    <div class="section-label">Clips</div>
+    <div class="section-label">
+      <span class="fr">Clips</span>
+      <span class="en">Videos</span>
+    </div>
     <div class="card">
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;">
+        <span class="fr">Quelques extraits du visual album&nbsp;:</span>
+        <span class="en">A few excerpts from the visual album:</span>
+      </p>
 
       <div class="video-grid">
 
         <div class="video-card">
           <a href="https://youtu.be/KK2kCKsIaGk?si=JVMR1sG17Lyh0BrK" target="_blank">
-            <div class="video-thumb" style="background-image:url('thumb_InWhichIFade.png')"></div>
+            <div class="video-thumb" style="background-image:url('thumb_InWhichIFade.png');"></div>
             <div>
               <div class="video-info-title">In Which I Fade</div>
-              <div class="video-info-meta">Clip officiel</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel – Seven Years</span>
+                <span class="en">Official music video – Seven Years</span>
+              </div>
             </div>
           </a>
         </div>
 
         <div class="video-card">
           <a href="https://youtu.be/2Lq1h47QWhE?si=M5ywr3tZIidarIqn" target="_blank">
-            <div class="video-thumb" style="background-image:url('thumb_mirrors.png')"></div>
+            <div class="video-thumb" style="background-image:url('thumb_mirrors.png');"></div>
             <div>
               <div class="video-info-title">Mirrors</div>
-              <div class="video-info-meta">Clip officiel</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel</span>
+                <span class="en">Official music video</span>
+              </div>
             </div>
           </a>
         </div>
 
         <div class="video-card">
           <a href="https://youtu.be/1brwj5MbLoY?si=rVwzagPSSYRtvfUR" target="_blank">
-            <div class="video-thumb" style="background-image:url('thumb_DistortedNSweet.png')"></div>
+            <div class="video-thumb" style="background-image:url('thumb_DistortedNSweet.png');"></div>
             <div>
-              <div class="video-info-title">Distorted n Sweet</div>
-              <div class="video-info-meta">Clip officiel</div>
+              <div class="video-info-title">Distorted and Sweet</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel</span>
+                <span class="en">Official music video</span>
+              </div>
             </div>
           </a>
         </div>
 
         <div class="video-card">
           <a href="https://youtu.be/SA9sbUJOWD0?si=ghAzXdExBW7S-dhI" target="_blank">
-            <div class="video-thumb" style="background-image:url('thumb_twisted.png')"></div>
+            <div class="video-thumb" style="background-image:url('thumb_twisted.png');"></div>
             <div>
               <div class="video-info-title">Twisted</div>
-              <div class="video-info-meta">Clip officiel</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel</span>
+                <span class="en">Official music video</span>
+              </div>
             </div>
           </a>
         </div>
 
       </div>
 
+      <p style="margin-top:1.2rem; font-size:0.85rem; color:var(--muted);">
+        YouTube · <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">youtube.com/c/septemberagainsa</a>
+      </p>
     </div>
   </section>
 
   <!-- EPK -->
   <section id="epk">
-    <div class="section-label">EPK</div>
+    <div class="section-label">EPK / Press Kit</div>
     <div class="card">
-      <p>Press kit (PDF) :</p>
-      <a class="btn" href="SeptemberAgain_EPK.pdf" target="_blank">Télécharger</a>
+      <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
+        <span class="fr">
+          Press kit complet : bio détaillée, photos HD, artworks, liens et informations techniques.
+        </span>
+        <span class="en">
+          Full press kit: extended bio, HD photos, artwork, links and technical information.
+        </span>
+      </p>
+
+      <div class="epk-grid">
+        <div class="epk-thumb" style="background-image:url('page_1.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_2.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_3.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_4.png');"></div>
+      </div>
+
+      <div class="epk-actions">
+        <a class="btn btn-primary" href="SeptemberAgain_EPK.pdf" target="_blank">
+          <span class="fr">Télécharger l’EPK (PDF)</span>
+          <span class="en">Download EPK (PDF)</span>
+        </a>
+        <a class="btn" href="SeptemberAgain_EPK.pdf" target="_blank">
+          <span class="fr">Ouvrir dans le navigateur</span>
+          <span class="en">Open in browser</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">
+      <span class="fr">Contact / Booking</span>
+      <span class="en">Contact / Booking</span>
+    </div>
+    <div class="card">
+      <p style="margin-top:0;">
+        Booking / Presse :<br>
+        <a href="mailto:september.again@outlook.fr">september.again@outlook.fr</a><br><br>
+        Autre contact :<br>
+        <a href="mailto:pecchanut@hotmail.fr">pecchanut@hotmail.fr</a>
+      </p>
+      <p style="font-size:0.9rem; color:var(--muted);">
+        <span class="fr">Réseaux :</span>
+        <span class="en">Socials:</span>
+      </p>
+      <div class="list-links">
+        <a href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/september_again/" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@septemberagainband" target="_blank">TikTok</a>
+        <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">YouTube</a>
+        <a href="https://linktr.ee/september.again" target="_blank">Linktree</a>
+      </div>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <img class="footer-logo" src="logo_sa_02.png">
-  © September Again — Tous droits réservés
+  <img src="logo_sa_02.png" class="footer-logo" alt="September Again logo stylisé">
+  © September Again — Tous droits réservés.
 </footer>
 
 <script>
-  document.getElementById("langToggle").addEventListener("click", () => {
+  const toggle = document.getElementById("langToggle");
+  toggle.addEventListener("click", () => {
     document.body.classList.toggle("lang-en");
     document.body.classList.toggle("lang-fr");
   });
