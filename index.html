@@ -110,4 +110,332 @@
       inset: 0;
       background: url("page_1.png") center/cover no-repeat;
       filter: grayscale(20%) contrast(1.05);
-      opacity:
+      opacity: 0.35;
+      z-index: -2;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 55%),
+        linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9));
+      z-index: -1;
+    }
+
+    .tagline {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      margin: 0 0 0.6rem;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hero-sub {
+      max-width: 32rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(5,5,8,0.75);
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+      border-color: transparent;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .hero-meta span strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .list-links {
+      display: grid;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .list-links a {
+      color: var(--text);
+      opacity: 0.85;
+    }
+
+    .list-links a:hover { opacity: 1; }
+
+    .epk-grid {
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .epk-thumb {
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .epk-actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 3fr 2.1fr;
+        align-items: center;
+      }
+      .grid-2 {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">SEPTEMBER AGAIN</div>
+    <nav>
+      <ul>
+        <li><a href="#bio">Bio</a></li>
+        <li><a href="#music">Musique</a></li>
+        <li><a href="#videos">Clips</a></li>
+        <li><a href="#epk">EPK</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section>
+    <div class="card hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+
+      <div>
+        <div class="tagline">Alternative Rock / Metal – France</div>
+        <h1 class="hero-title">Seven Years</h1>
+        <p class="hero-sub">
+          12 titres, 12 films. Un album-concept où chaque morceau devient un court-métrage,
+          entre rage contenue, perte de repères et besoin de lâcher prise.
+        </p>
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
+            Voir le dernier clip
+          </a>
+          <a class="btn" href="#epk">
+            Accéder à l’EPK
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span><strong>FFO</strong> Deftones, Karnivool, Massive Attack</span>
+          <span><strong>Format</strong> Album + visual album</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">À propos</div>
+        <p style="font-size:0.85rem; color:var(--muted); margin-top:0;">
+          Projet indépendant né en Haute-Savoie, September Again traite l’image
+          et le son au même niveau : chaque sortie est pensée comme une pièce de cinéma.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIO -->
+  <section id="bio">
+    <div class="section-label">Biographie</div>
+    <div class="card">
+      <p style="margin-top:0;">
+        September Again construit des morceaux denses et cinématiques où rock alternatif,
+        metal moderne et atmosphères électroniques se percutent. Sur <strong>Seven Years</strong>,
+        le groupe transforme chaque titre en film, comme un même fil narratif qui traverse
+        la violence des émotions, la perte de contrôle et la reconstruction.
+      </p>
+      <p style="color:var(--muted);">
+        Le groupe travaille autant la production visuelle que sonore&nbsp;:
+        mise en scène, montage, photographie et direction artistique sont entièrement
+        portés par les membres, pour garder un univers cohérent et personnel.
+      </p>
+    </div>
+  </section>
+
+  <!-- MUSIQUE / STREAMING -->
+  <section id="music">
+    <div class="section-label">Écouter</div>
+    <div class="grid-2">
+      <div class="card">
+        <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
+          Disponible sur toutes les plateformes&nbsp;:
+        </p>
+        <div class="list-links">
+          <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
+          <a href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
+          <a href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
+          <a href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
+          <a href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
+          Quelques titres clés&nbsp;:
+        </p>
+        <ul style="margin:0; padding-left:1.1rem; font-size:0.9rem;">
+          <li>“Mirrors”</li>
+          <li>“Prizm”</li>
+          <li>“This Curse”</li>
+          <li>“Distorted and Sweet”</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <div class="section-label">Clips / Visual Album</div>
+    <div class="card">
+      <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
+        Chaque morceau est accompagné de son film. Exemples&nbsp;:
+      </p>
+      <div class="list-links">
+        <a href="https://youtu.be/KK2kCKsIaGk" target="_blank">Clip 1</a>
+        <a href="https://youtu.be/2Lq1h47QWhE" target="_blank">Clip 2</a>
+        <a href="https://youtu.be/LLh2WisOAJM" target="_blank">Clip 3</a>
+        <!-- Tu peux compléter avec les autres liens -->
+      </div>
+    </div>
+  </section>
+
+  <!-- EPK -->
+  <section id="epk">
+    <div class="section-label">EPK / Press Kit</div>
+    <div class="card">
+      <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
+        Press kit complet (bio détaillée, photos HD, artworks, liens, infos techniques).
+      </p>
+
+      <div class="epk-grid">
+        <div class="epk-thumb" style="background-image:url('page_1.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_2.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_3.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_4.png');"></div>
+      </div>
+
+      <div class="epk-actions">
+        <a class="btn btn-primary" href="SeptemberAgain_EPK.pdf" target="_blank">
+          Télécharger l’EPK (PDF)
+        </a>
+        <a class="btn btn-ghost" href="SeptemberAgain_EPK.pdf" target="_blank">
+          Ouvrir dans le navigateur
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact / Booking</div>
+    <div class="card">
+      <p style="margin-top:0;">
+        Booking / Presse&nbsp;:<br>
+        <a href="mailto:september.again@outlook.fr">september.again@outlook.fr</a><br>
+        Autre contact&nbsp;:<br>
+        <a href="mailto:pecchanut@hotmail.fr">pecchanut@hotmail.fr</a>
+      </p>
+      <p style="font-size:0.9rem; color:var(--muted);">
+        Réseaux&nbsp;:
+      </p>
+      <div class="list-links">
+        <a href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/september_again/" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@septemberagainband" target="_blank">TikTok</a>
+        <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">YouTube</a>
+        <a href="https://linktr.ee/september.again" target="_blank">Linktree</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © September Again — Tous droits réservés.
+</footer>
+
+</body>
+</html>
