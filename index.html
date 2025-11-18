@@ -1,10 +1,502 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Test September Again</title>
+  <meta charset="UTF-8" />
+  <title>September Again – Official Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050508;
+      --bg-alt: #0b0b10;
+      --accent: #ff315e;
+      --text: #f5f5f5;
+      --muted: #aaaaaa;
+      --max-width: 1100px;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #14141f 0, #050508 45%);
+      color: var(--text);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.3));
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      letter-spacing: 0.16em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0;
+      margin: 0;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.65);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url("page_1.png") center/cover no-repeat;
+      opacity: 0.35;
+      filter: grayscale(25%);
+      z-index: -2;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.1), rgba(0,0,0,0.95));
+      z-index: -1;
+    }
+
+    .hero-tag {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin: 0 0 0.75rem;
+    }
+
+    .hero-sub {
+      max-width: 32rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(5,5,8,0.7);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), #ff7b42);
+      border-color: transparent;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .hero-meta span strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-right: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .video-list {
+      display: grid;
+      gap: 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .video-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .video-title {
+      font-weight: 500;
+    }
+
+    .video-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .epk-gallery {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .epk-thumb {
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .press-links,
+    .social-links {
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .press-links a,
+    .social-links a {
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    .press-links a:hover,
+    .social-links a:hover {
+      opacity: 1;
+    }
+
+    .contact-block {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 3fr 2fr;
+        align-items: center;
+      }
+      .grid-2 {
+        grid-template-columns: 1.3fr 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
 </head>
-<body style="background:#050508; color:#f5f5f5; font-family:system-ui; display:flex; align-items:center; justify-content:center; height:100vh; margin:0;">
-  <h1>Ça marche pour September Again 🔥</h1>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">SEPTEMBER AGAIN</div>
+    <nav>
+      <ul>
+        <li><a href="#bio">Bio</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#videos">Clips</a></li>
+        <li><a href="#press">Press / EPK</a></li>
+        <li><a href="#merch">Merch</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section>
+    <div class="card hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+
+      <div>
+        <div class="hero-tag">Alternative Rock / Metal – France</div>
+        <h1 class="hero-title">Seven Years</h1>
+        <p class="hero-sub">
+          Concept album &amp; visual project by September Again – 12 tracks,
+          12 films. A visceral journey between catharsis, obsession
+          and fragile hope.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
+            Watch the latest video
+          </a>
+          <a class="btn" href="https://septemberagain.bandcamp.com/music" target="_blank">
+            Listen / Buy
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span><strong>New album</strong> Seven Years</span>
+          <span><strong>FFO</strong> Deftones, Karnivool, Massive Attack</span>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div>
+          <div class="section-title">For fans of</div>
+          <span class="pill">Deftones</span>
+          <span class="pill">Karnivool</span>
+          <span class="pill">Radiohead</span>
+          <span class="pill">Massive Attack</span>
+        </div>
+        <div>
+          <div class="section-title">Formats</div>
+          <p style="font-size:0.85rem; color:var(--muted);">
+            Digital • Vinyl • Full visual album on YouTube.
+          </p>
+        </div>
+        <div>
+          <div class="section-title">From</div>
+          <p style="font-size:0.85rem; color:var(--muted);">
+            Haute-Savoie, France.<br />Indie &amp; self-produced.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIO -->
+  <section id="bio">
+    <div class="section-title">Biography</div>
+    <div class="card">
+      <p style="font-size:0.95rem; line-height:1.7;">
+        September Again crafts dense, cinematic songs where alternative rock,
+        metal and ambient sound design collide. On <em>Seven Years</em>, the band
+        turns each track into a short film, blending heavy riffs, fragile vocals
+        and visual storytelling into one continuous emotional thread.
+      </p>
+      <p style="font-size:0.9rem; line-height:1.7; color:var(--muted);">
+        The project pushes as far on the visual side as it does on the sound:
+        every release comes with a dedicated film, carefully directed and edited
+        by the band, exploring themes of identity, grief, control and release.
+      </p>
+    </div>
+  </section>
+
+  <!-- MUSIC / STREAMING -->
+  <section id="music">
+    <div class="section-title">Music &amp; Streaming</div>
+    <div class="grid-2">
+      <div class="card">
+        <p style="font-size:0.9rem; color:var(--muted); margin-top:0;">
+          Available on all major platforms:
+        </p>
+        <div class="press-links">
+          <a href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
+          <a href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
+          <a href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
+          <a href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
+          <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
+        </div>
+      </div>
+      <div class="card">
+        <p style="font-size:0.9rem; color:var(--muted); margin-top:0;">
+          Selected tracks:
+        </p>
+        <ul style="margin:0; padding-left:1rem; font-size:0.9rem;">
+          <li>“Mirrors”</li>
+          <li>“Prizm”</li>
+          <li>“This Curse”</li>
+          <li>“Distorted and Sweet”</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <div class="section-title">Videos / Visual Album</div>
+    <div class="card">
+      <p style="font-size:0.9rem; color:var(--muted); margin-top:0;">
+        Each song comes with its own film. A few entries:
+      </p>
+      <div class="video-list">
+        <div class="video-item">
+          <div class="video-title">
+            <a href="https://youtu.be/KK2kCKsIaGk" target="_blank">Video 1</a>
+          </div>
+          <div class="video-meta">Official music video</div>
+        </div>
+        <div class="video-item">
+          <div class="video-title">
+            <a href="https://youtu.be/2Lq1h47QWhE" target="_blank">Video 2</a>
+          </div>
+          <div class="video-meta">Official music video</div>
+        </div>
+        <!-- Ajoute ici les autres liens YouTube si tu veux -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS / EPK -->
+  <section id="press">
+    <div class="section-title">Press / EPK</div>
+    <div class="card">
+      <p style="font-size:0.9rem; color:var(--muted); margin-top:0;">
+        Full press kit (bio, photos, artwork, technical details) available on request.
+      </p>
+      <div class="epk-gallery">
+        <div class="epk-thumb" style="background-image:url('page_1.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_2.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_3.png');"></div>
+        <div class="epk-thumb" style="background-image:url('page_4.png');"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MERCH -->
+  <section id="merch">
+    <div class="section-title">Merch</div>
+    <div class="card">
+      <p style="font-size:0.9rem; color:var(--muted); margin-top:0;">
+        Vinyl, apparel and limited prints coming soon.
+      </p>
+      <p style="font-size:0.85rem; color:var(--muted);">
+        In the meantime, you can support the band directly via:
+      </p>
+      <div class="press-links">
+        <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp – digital &amp; merch</a>
+        <!-- Ici plus tard : embed boutique PayHip / autre -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-title">Contact / Booking</div>
+    <div class="card contact-block">
+      <p>
+        For booking, press or collaboration:
+      </p>
+      <p>
+        Email: <a href="mailto:september.again@outlook.fr">september.again@outlook.fr</a><br />
+        Alt: <a href="mailto:pecchanut@hotmail.fr">pecchanut@hotmail.fr</a>
+      </p>
+      <p>
+        Socials:
+      </p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/september_again/" target="_blank">Instagram</a>
+        <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
+        <a href="https://www.tiktok.com/@septemberagainband" target="_blank">TikTok</a>
+        <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">YouTube</a>
+        <a href="https://linktr.ee/september.again" target="_blank">Linktree</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © September Again – All rights reserved.
+</footer>
+
 </body>
 </html>
