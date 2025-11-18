@@ -8,9 +8,9 @@
   <style>
     :root {
       --bg: #040612;
-      --bg-alt: #070918;
-      --card-dark: #050816;
-      --card-light: #0c1024;
+      --card-dark: #050818;
+      --card-light: #090f26;
+      --card-alt: #050816;
       --text: #e6e9f4;
       --muted: #8a93ad;
       --accent: #5fa8ff;
@@ -24,8 +24,8 @@
     body {
       margin: 0;
       background:
-        radial-gradient(circle at top, #1b2139 0, #040612 55%),
-        radial-gradient(circle at bottom, #050715 0, #040612 65%);
+        radial-gradient(circle at top, #262f55 0, #040612 52%),
+        radial-gradient(circle at bottom, #050715 0, #040612 68%);
       color: var(--text);
       font-family: system-ui, -apple-system, sans-serif;
       line-height: 1.7;
@@ -117,12 +117,12 @@
 
     .card {
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.04), transparent 55%),
-        linear-gradient(135deg, var(--card-dark), var(--card-light));
+        radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 55%),
+        linear-gradient(140deg, var(--card-dark), var(--card-light));
       border-radius: var(--radius);
       border: 1px solid var(--border);
       padding: 1.6rem;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.85);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.9);
       position: relative;
       overflow: hidden;
     }
@@ -139,8 +139,8 @@
       position: absolute;
       inset: 0;
       background: url("hero_01.png") center/cover no-repeat;
-      opacity: 0.35;
-      filter: brightness(0.55) saturate(0.75);
+      opacity: 0.4;
+      filter: brightness(0.5) saturate(0.75);
       z-index: -2;
     }
 
@@ -155,7 +155,7 @@
     .hero-right { position: relative; }
 
     .hero-logo {
-      width: clamp(180px, 40%, 360px);
+      width: clamp(190px, 42%, 360px);
       max-width: 100%;
       display: block;
       margin: 0 auto 0.9rem;
@@ -191,7 +191,7 @@
       padding: 0.6rem 1.4rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(6,8,22,0.95);
+      background: rgba(6,8,22,0.96);
       color: var(--text);
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -228,10 +228,24 @@
     /* GENERIC */
     .card p { margin-top: 0; }
 
-    .list-links {
-      display: grid;
-      gap: 0.3rem;
-      font-size: 0.9rem;
+    /* ÉCOUTER — boutons plateformes */
+    .platform-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    .platform-btn {
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: linear-gradient(135deg, #050816, #0c1024);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.75);
     }
 
     /* CLIPS */
@@ -245,8 +259,8 @@
       grid-template-columns: 160px 1fr;
       gap: 1rem;
       background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.03), transparent 55%),
-        linear-gradient(135deg, #050816, #090d22);
+        radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 55%),
+        linear-gradient(145deg, var(--card-alt), #0a0f23);
       border-radius: 16px;
       border: 1px solid var(--border);
       padding: 0.8rem;
@@ -277,36 +291,29 @@
       margin-bottom: 0.1rem;
     }
 
-    .video-info-meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
     .video-card a {
       color: inherit;
       text-decoration: none;
     }
     .video-card a:hover .video-info-title { text-decoration: underline; }
 
+    .youtube-btn-wrap {
+      margin-top: 1.3rem;
+    }
+
     @media(max-width: 720px) {
       .video-card { grid-template-columns: 1fr; }
     }
 
     /* EPK */
-    .epk-grid {
-      display: grid;
-      gap: 0.9rem;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    .epk-thumb-single {
       margin-top: 1rem;
-    }
-
-    .epk-thumb {
-      aspect-ratio: 3/4;
-      border-radius: 14px;
+      border-radius: 16px;
       border: 1px solid var(--border);
       background-size: cover;
       background-position: center;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+      aspect-ratio: 16/9;
+      box-shadow: 0 22px 50px rgba(0,0,0,0.9);
     }
 
     .epk-actions {
@@ -314,6 +321,47 @@
       display: flex;
       gap: 0.8rem;
       flex-wrap: wrap;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .contact-block-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .contact-buttons,
+    .social-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .contact-btn,
+    .social-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: linear-gradient(135deg, #050816, #0c1024);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.75);
+      cursor: pointer;
+    }
+
+    .contact-info-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
     }
 
     /* FOOTER */
@@ -337,12 +385,8 @@
         flex-wrap: wrap;
         justify-content: center;
       }
-      nav {
-        order: 2;
-      }
-      .nav-actions {
-        order: 3;
-      }
+      nav { order: 2; }
+      .nav-actions { order: 3; }
     }
   </style>
 </head>
@@ -351,7 +395,7 @@
 
 <header>
   <div class="nav-inner">
-    <div></div> <!-- vide pour garder un peu d'air à gauche -->
+    <div></div>
 
     <nav>
       <ul>
@@ -483,12 +527,12 @@
         <span class="fr">September Again est disponible sur les principales plateformes&nbsp;:</span>
         <span class="en">September Again is available on major platforms:</span>
       </p>
-      <div class="list-links">
-        <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
-        <a href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
-        <a href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
-        <a href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
-        <a href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
+      <div class="platform-buttons">
+        <a class="platform-btn" href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
+        <a class="platform-btn" href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
+        <a class="platform-btn" href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
+        <a class="platform-btn" href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
+        <a class="platform-btn" href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
       </div>
     </div>
   </section>
@@ -500,11 +544,6 @@
       <span class="en">Videos</span>
     </div>
     <div class="card">
-      <p style="color:var(--muted); font-size:0.9rem; margin-top:0;">
-        <span class="fr">Quelques clips :</span>
-        <span class="en">A few videos:</span>
-      </p>
-
       <div class="video-grid">
 
         <div class="video-card">
@@ -545,7 +584,7 @@
 
       </div>
 
-      <div style="margin-top:1.3rem;">
+      <div class="youtube-btn-wrap">
         <a class="btn" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
           <span class="fr">Chaîne YouTube</span>
           <span class="en">YouTube channel</span>
@@ -567,12 +606,7 @@
         </span>
       </p>
 
-      <div class="epk-grid">
-        <div class="epk-thumb" style="background-image:url('page_1.png');"></div>
-        <div class="epk-thumb" style="background-image:url('page_2.png');"></div>
-        <div class="epk-thumb" style="background-image:url('page_3.png');"></div>
-        <div class="epk-thumb" style="background-image:url('page_4.png');"></div>
-      </div>
+      <div class="epk-thumb-single" style="background-image:url('page_1.png');"></div>
 
       <div class="epk-actions">
         <a class="btn btn-primary" href="SeptemberAgain_EPK.pdf" target="_blank">
@@ -594,22 +628,39 @@
       <span class="en">Contact / Booking</span>
     </div>
     <div class="card">
-      <p style="margin-top:0;">
-        Booking / Presse :<br>
-        <a href="mailto:september.again@outlook.fr">september.again@outlook.fr</a><br><br>
-        Autre contact :<br>
-        <a href="mailto:pecchanut@hotmail.fr">pecchanut@hotmail.fr</a>
-      </p>
-      <p style="font-size:0.9rem; color:var(--muted);">
-        <span class="fr">Réseaux :</span>
-        <span class="en">Socials:</span>
-      </p>
-      <div class="list-links">
-        <a href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
-        <a href="https://www.instagram.com/september_again/" target="_blank">Instagram</a>
-        <a href="https://www.tiktok.com/@septemberagainband" target="_blank">TikTok</a>
-        <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">YouTube</a>
-        <a href="https://linktr.ee/september.again" target="_blank">Linktree</a>
+      <div class="contact-grid">
+
+        <div>
+          <div class="contact-block-title">Email</div>
+          <div class="contact-buttons">
+            <a class="contact-btn" href="mailto:september.again@outlook.fr">Booking / Presse</a>
+            <a class="contact-btn" href="mailto:pecchanut@hotmail.fr">Autre contact</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-block-title">Téléphone</div>
+          <div class="contact-info-text">
+            <!-- Remplace les numéros par les vrais -->
+            Booking : +33 (0)6 xx xx xx xx<br>
+            Autre contact : +33 (0)6 yy yy yy yy
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-block-title">
+            <span class="fr">Réseaux</span>
+            <span class="en">Socials</span>
+          </div>
+          <div class="social-buttons">
+            <a class="social-btn" href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
+            <a class="social-btn" href="https://www.instagram.com/september_again/" target="_blank">Instagram</a>
+            <a class="social-btn" href="https://www.tiktok.com/@septemberagainband" target="_blank">TikTok</a>
+            <a class="social-btn" href="https://www.youtube.com/c/septemberagainsa" target="_blank">YouTube</a>
+            <a class="social-btn" href="https://linktr.ee/september.again" target="_blank">Linktree</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
