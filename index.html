@@ -30,6 +30,13 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    /* LANG SWITCH */
+    .fr { display: inline; }
+    .en { display: none; }
+
+    body.lang-en .fr { display: none; }
+    body.lang-en .en { display: inline; }
+
     /* HEADER / NAV */
     header {
       position: sticky;
@@ -70,6 +77,22 @@
 
     nav a { color: var(--muted); }
     nav a:hover { color: var(--text); }
+
+    .lang-toggle {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      background: rgba(5,5,8,0.8);
+      color: var(--muted);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .lang-toggle strong {
+      color: var(--text);
+    }
 
     /* LAYOUT */
     main {
@@ -237,6 +260,56 @@
       border-color: rgba(255,255,255,0.3);
     }
 
+    /* VIDEO GRID */
+    .video-grid {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .video-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0.9rem;
+      align-items: center;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.06), rgba(0,0,0,0.9));
+      border-radius: 14px;
+      padding: 0.7rem;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .video-thumb {
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+      background: radial-gradient(circle at top, #383848, #050508);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .video-info-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .video-info-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .video-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .video-card a:hover .video-info-title {
+      text-decoration: underline;
+    }
+
     /* FOOTER */
     footer {
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -255,24 +328,37 @@
       .grid-2 {
         grid-template-columns: 1.2fr 1fr;
       }
+      .video-card {
+        grid-template-columns: 160px 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .video-card {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
-<body>
+<body class="lang-fr">
 
 <header>
   <div class="nav-inner">
     <div class="logo">SEPTEMBER AGAIN</div>
     <nav>
       <ul>
-        <li><a href="#bio">Bio</a></li>
-        <li><a href="#music">Musique</a></li>
-        <li><a href="#videos">Clips</a></li>
+        <li><a href="#bio"><span class="fr">Bio</span><span class="en">Bio</span></a></li>
+        <li><a href="#music"><span class="fr">Musique</span><span class="en">Music</span></a></li>
+        <li><a href="#videos"><span class="fr">Clips</span><span class="en">Videos</span></a></li>
         <li><a href="#epk">EPK</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact"><span class="fr">Contact</span><span class="en">Contact</span></a></li>
       </ul>
     </nav>
+    <button class="lang-toggle" id="langToggle">
+      <span class="fr"><strong>FR</strong> / EN</span>
+      <span class="en">FR / <strong>EN</strong></span>
+    </button>
   </div>
 </header>
 
@@ -285,33 +371,58 @@
       <div class="hero-overlay"></div>
 
       <div>
-        <div class="tagline">Alternative Rock / Metal – France</div>
-        <h1 class="hero-title">Seven Years</h1>
+        <div class="tagline">
+          <span class="fr">Alternative Rock / Metal – France</span>
+          <span class="en">Alternative Rock / Metal – France</span>
+        </div>
+
+        <h1 class="hero-title">SEPTEMBER AGAIN</h1>
+
         <p class="hero-sub">
-          12 titres, 12 films. Un album-concept où chaque morceau devient un court-métrage,
-          entre rage contenue, perte de repères et besoin de lâcher prise.
+          <span class="fr">
+            Groupe de rock / metal alternatif cinématographique, September Again mêle riffs lourds,
+            voix fragiles et ambiances électroniques pour construire de véritables petits films sonores.
+          </span>
+          <span class="en">
+            A cinematic alternative rock / metal band blending heavy riffs, fragile vocals
+            and electronic textures into short emotional films.
+          </span>
         </p>
 
         <div class="hero-ctas">
           <a class="btn btn-primary" href="https://www.youtube.com/c/septemberagainsa" target="_blank">
-            Voir le dernier clip
+            <span class="fr">Voir le dernier clip</span>
+            <span class="en">Watch latest video</span>
           </a>
           <a class="btn" href="#epk">
-            Accéder à l’EPK
+            <span class="fr">Accéder à l’EPK</span>
+            <span class="en">Open EPK</span>
           </a>
         </div>
 
         <div class="hero-meta">
-          <span><strong>FFO</strong> Deftones, Karnivool, Massive Attack</span>
-          <span><strong>Format</strong> Album + visual album</span>
+          <span>
+            <strong>FFO</strong> Deftones, Karnivool, Massive Attack
+          </span>
         </div>
       </div>
 
       <div>
-        <div class="section-label">À propos</div>
+        <div class="section-label">
+          <span class="fr">À propos</span>
+          <span class="en">About</span>
+        </div>
         <p style="font-size:0.85rem; color:var(--muted); margin-top:0;">
-          Projet indépendant né en Haute-Savoie, September Again traite l’image
-          et le son au même niveau : chaque sortie est pensée comme une pièce de cinéma.
+          <span class="fr">
+            <strong>Seven Years</strong>, le nouvel album-concept de September Again,
+            sortira le <strong>7 septembre 2025</strong>. Douze titres, chacun accompagné de son propre film,
+            forment un récit continu qui explore la perte de contrôle, la catharsis et la reconstruction.
+          </span>
+          <span class="en">
+            <strong>Seven Years</strong>, the new concept album by September Again,
+            will be released on <strong>September 7th, 2025</strong>. Twelve tracks, each with its own film,
+            form a continuous narrative about losing control, catharsis and rebuilding.
+          </span>
         </p>
       </div>
     </div>
@@ -319,65 +430,122 @@
 
   <!-- BIO -->
   <section id="bio">
-    <div class="section-label">Biographie</div>
+    <div class="section-label">
+      <span class="fr">Biographie</span>
+      <span class="en">Biography</span>
+    </div>
     <div class="card">
       <p style="margin-top:0;">
-        September Again construit des morceaux denses et cinématiques où rock alternatif,
-        metal moderne et atmosphères électroniques se percutent. Sur <strong>Seven Years</strong>,
-        le groupe transforme chaque titre en film, comme un même fil narratif qui traverse
-        la violence des émotions, la perte de contrôle et la reconstruction.
+        <span class="fr">
+          Né en Haute-Savoie, September Again développe depuis plusieurs années un rock alternatif teinté de metal,
+          de trip-hop et d’ambient. Après un premier EP, <em>Insomniac</em>, le groupe affine son identité sur
+          <em>From Nothing to Nowhere</em>, un album où les guitares denses se mêlent à des nappes électroniques
+          et à des voix habitées, entre tension et fragilité.
+        </span>
+        <span class="en">
+          Born in Haute-Savoie, France, September Again has been shaping a blend of alternative rock, metal,
+          trip-hop and ambient for several years. After a first EP, <em>Insomniac</em>, the band refined its identity
+          on <em>From Nothing to Nowhere</em>, where dense guitars collide with electronic layers and vulnerable vocals,
+          constantly oscillating between tension and fragility.
+        </span>
       </p>
-      <p style="color:var(--muted);">
-        Le groupe travaille autant la production visuelle que sonore&nbsp;:
-        mise en scène, montage, photographie et direction artistique sont entièrement
-        portés par les membres, pour garder un univers cohérent et personnel.
+      <p style="color:var(--muted); margin-bottom:0;">
+        <span class="fr">
+          Avec <strong>Seven Years</strong>, le groupe pousse encore plus loin son approche cinématographique&nbsp;:
+          chaque titre devient un court-métrage, réalisé et monté par le groupe lui-même. Image et son sont pensés
+          au même niveau, comme un seul langage pour raconter l’ascenseur émotionnel qui secoue, casse les mots
+          et force à se réinventer.
+        </span>
+        <span class="en">
+          With <strong>Seven Years</strong>, the band takes its cinematic approach even further:
+          every song becomes a short film, directed and edited by the band. Sound and image are treated as one single
+          language to tell the story of an emotional roller coaster that shakes you to the core, breaks words apart
+          and forces you to rebuild yourself.
+        </span>
       </p>
     </div>
   </section>
 
   <!-- MUSIQUE / STREAMING -->
   <section id="music">
-    <div class="section-label">Écouter</div>
-    <div class="grid-2">
-      <div class="card">
-        <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
-          Disponible sur toutes les plateformes&nbsp;:
-        </p>
-        <div class="list-links">
-          <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
-          <a href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
-          <a href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
-          <a href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
-          <a href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
-          Quelques titres clés&nbsp;:
-        </p>
-        <ul style="margin:0; padding-left:1.1rem; font-size:0.9rem;">
-          <li>“Mirrors”</li>
-          <li>“Prizm”</li>
-          <li>“This Curse”</li>
-          <li>“Distorted and Sweet”</li>
-        </ul>
+    <div class="section-label">
+      <span class="fr">Écouter</span>
+      <span class="en">Listen</span>
+    </div>
+    <div class="card">
+      <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
+        <span class="fr">Disponible sur toutes les plateformes :</span>
+        <span class="en">Available on all major platforms:</span>
+      </p>
+      <div class="list-links">
+        <a href="https://septemberagain.bandcamp.com/music" target="_blank">Bandcamp</a>
+        <a href="https://www.qobuz.com/lu-fr/interpreter/september-again/3031191" target="_blank">Qobuz</a>
+        <a href="https://music.apple.com/fr/artist/september-again/1217780116" target="_blank">Apple Music</a>
+        <a href="https://www.deezer.com/fr/artist/11288106" target="_blank">Deezer</a>
+        <a href="https://music.youtube.com/channel/UC-WtwDqo5kCTRSj6zl4xVcw" target="_blank">YouTube Music</a>
       </div>
     </div>
   </section>
 
   <!-- VIDEOS -->
   <section id="videos">
-    <div class="section-label">Clips / Visual Album</div>
+    <div class="section-label">
+      <span class="fr">Clips / Visual Album</span>
+      <span class="en">Videos / Visual Album</span>
+    </div>
     <div class="card">
       <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
-        Chaque morceau est accompagné de son film. Exemples&nbsp;:
+        <span class="fr">Chaque morceau est accompagné de son film. Quelques exemples :</span>
+        <span class="en">Each song comes with its own film. A few examples:</span>
       </p>
-      <div class="list-links">
-        <a href="https://youtu.be/KK2kCKsIaGk" target="_blank">Clip 1</a>
-        <a href="https://youtu.be/2Lq1h47QWhE" target="_blank">Clip 2</a>
-        <a href="https://youtu.be/LLh2WisOAJM" target="_blank">Clip 3</a>
-        <!-- Tu peux compléter avec les autres liens -->
+
+      <div class="video-grid">
+        <div class="video-card">
+          <a href="https://youtu.be/KK2kCKsIaGk" target="_blank">
+            <div class="video-thumb">
+              <span>VIDEO</span>
+            </div>
+            <div>
+              <div class="video-info-title">Mirrors</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel – extrait de Seven Years</span>
+                <span class="en">Official music video – from Seven Years</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="video-card">
+          <a href="https://youtu.be/2Lq1h47QWhE" target="_blank">
+            <div class="video-thumb">
+              <span>VIDEO</span>
+            </div>
+            <div>
+              <div class="video-info-title">Distorted and Sweet</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel – tension / relâchement</span>
+                <span class="en">Official music video – tension & release</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="video-card">
+          <a href="https://youtu.be/LLh2WisOAJM" target="_blank">
+            <div class="video-thumb">
+              <span>VIDEO</span>
+            </div>
+            <div>
+              <div class="video-info-title">Prizm</div>
+              <div class="video-info-meta">
+                <span class="fr">Clip officiel – atmosphères plus électroniques</span>
+                <span class="en">Official music video – more electronic moods</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Tu pourras dupliquer ce bloc pour d'autres clips -->
       </div>
     </div>
   </section>
@@ -387,7 +555,12 @@
     <div class="section-label">EPK / Press Kit</div>
     <div class="card">
       <p style="margin-top:0; font-size:0.9rem; color:var(--muted);">
-        Press kit complet (bio détaillée, photos HD, artworks, liens, infos techniques).
+        <span class="fr">
+          Press kit complet : bio détaillée, photos HD, artworks, liens et informations techniques.
+        </span>
+        <span class="en">
+          Full press kit: extended bio, HD photos, artwork, links and technical information.
+        </span>
       </p>
 
       <div class="epk-grid">
@@ -399,10 +572,12 @@
 
       <div class="epk-actions">
         <a class="btn btn-primary" href="SeptemberAgain_EPK.pdf" target="_blank">
-          Télécharger l’EPK (PDF)
+          <span class="fr">Télécharger l’EPK (PDF)</span>
+          <span class="en">Download EPK (PDF)</span>
         </a>
         <a class="btn btn-ghost" href="SeptemberAgain_EPK.pdf" target="_blank">
-          Ouvrir dans le navigateur
+          <span class="fr">Ouvrir dans le navigateur</span>
+          <span class="en">Open in browser</span>
         </a>
       </div>
     </div>
@@ -410,16 +585,24 @@
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="section-label">Contact / Booking</div>
+    <div class="section-label">
+      <span class="fr">Contact / Booking</span>
+      <span class="en">Contact / Booking</span>
+    </div>
     <div class="card">
       <p style="margin-top:0;">
-        Booking / Presse&nbsp;:<br>
+        <span class="fr">Booking / Presse :</span>
+        <span class="en">Booking / Press:</span>
+        <br>
         <a href="mailto:september.again@outlook.fr">september.again@outlook.fr</a><br>
-        Autre contact&nbsp;:<br>
+        <span class="fr">Autre contact :</span>
+        <span class="en">Alt. contact:</span>
+        <br>
         <a href="mailto:pecchanut@hotmail.fr">pecchanut@hotmail.fr</a>
       </p>
       <p style="font-size:0.9rem; color:var(--muted);">
-        Réseaux&nbsp;:
+        <span class="fr">Réseaux :</span>
+        <span class="en">Socials:</span>
       </p>
       <div class="list-links">
         <a href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
@@ -436,6 +619,21 @@
 <footer>
   © September Again — Tous droits réservés.
 </footer>
+
+<script>
+  const toggle = document.getElementById('langToggle');
+  toggle.addEventListener('click', () => {
+    const body = document.body;
+    const isFr = body.classList.contains('lang-fr');
+    if (isFr) {
+      body.classList.remove('lang-fr');
+      body.classList.add('lang-en');
+    } else {
+      body.classList.remove('lang-en');
+      body.classList.add('lang-fr');
+    }
+  });
+</script>
 
 </body>
 </html>
