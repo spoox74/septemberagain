@@ -95,8 +95,35 @@
       text-transform: uppercase;
       color: var(--muted);
       cursor: pointer;
+      white-space: nowrap;
     }
     .lang-toggle strong { color: var(--text); }
+
+    /* Réseaux en haut */
+    .social-top {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .social-top a {
+      display: inline-flex;
+      padding: 0.15rem;
+      border-radius: 999px;
+    }
+
+    .social-top img {
+      width: 18px;
+      height: 18px;
+      filter: brightness(0) invert(1); /* noir -> blanc */
+      opacity: 0.7;
+      transition: 0.2s ease;
+    }
+
+    .social-top img:hover {
+      opacity: 1;
+      filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(95,168,255,0.6));
+    }
 
     /* MAIN */
     main {
@@ -337,15 +364,13 @@
       margin-bottom: 0.35rem;
     }
 
-    .contact-buttons,
-    .social-buttons {
+    .contact-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
     }
 
-    .contact-btn,
-    .social-btn {
+    .contact-btn {
       padding: 0.5rem 1.1rem;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -408,6 +433,24 @@
     </nav>
 
     <div class="nav-actions">
+      <div class="social-top">
+        <a href="https://www.facebook.com/SeptemberAgain" target="_blank">
+          <img src="social_facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/september_again/" target="_blank">
+          <img src="social_instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.tiktok.com/@septemberagainband" target="_blank">
+          <img src="social_tiktok.png" alt="TikTok">
+        </a>
+        <a href="https://www.youtube.com/c/septemberagainsa" target="_blank">
+          <img src="social_youtube.png" alt="YouTube">
+        </a>
+        <a href="https://linktr.ee/september.again" target="_blank">
+          <img src="social_linktree.png" alt="Linktree">
+        </a>
+      </div>
+
       <button id="langToggle" class="lang-toggle">
         <span class="fr"><strong>FR</strong> / EN</span>
         <span class="en">FR / <strong>EN</strong></span>
@@ -647,20 +690,6 @@
           </div>
         </div>
 
-        <div>
-          <div class="contact-block-title">
-            <span class="fr">Réseaux</span>
-            <span class="en">Socials</span>
-          </div>
-          <div class="social-buttons">
-            <a class="social-btn" href="https://www.facebook.com/SeptemberAgain" target="_blank">Facebook</a>
-            <a class="social-btn" href="https://www.instagram.com/september_again/" target="_blank">Instagram</a>
-            <a class="social-btn" href="https://www.tiktok.com/@septemberagainband" target="_blank">TikTok</a>
-            <a class="social-btn" href="https://www.youtube.com/c/septemberagainsa" target="_blank">YouTube</a>
-            <a class="social-btn" href="https://linktr.ee/september.again" target="_blank">Linktree</a>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -682,7 +711,3 @@
 
 </body>
 </html>
-
-
-
-
