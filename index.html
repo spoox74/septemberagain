@@ -26,17 +26,8 @@
         }
 
         /* FONTS LOCALES */
-        @font-face {
-            font-family: 'Lovelo';
-            src: url('./Lovelo-Black.otf') format('opentype'),
-                 url('./Lovelo.otf') format('opentype');
-            font-weight: normal; font-style: normal;
-        }
-        @font-face {
-            font-family: 'Farray';
-            src: url('./Farray.otf') format('opentype');
-            font-weight: normal; font-style: normal;
-        }
+        @font-face { font-family: 'Lovelo'; src: url('./Lovelo-Black.otf') format('opentype'), url('./Lovelo.otf') format('opentype'); font-weight: normal; font-style: normal; }
+        @font-face { font-family: 'Farray'; src: url('./Farray.otf') format('opentype'); font-weight: normal; font-style: normal; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -50,13 +41,9 @@
         }
 
         /* GESTION DES LANGUES */
-        /* Par défaut, on cache l'anglais si le body n'a pas de classe, ou on gère via JS */
         .lang-en { display: none; } 
-        
-        /* Quand le body a la classe 'english-mode', on inverse */
         body.english-mode .lang-fr { display: none; }
         body.english-mode .lang-en { display: inline; }
-        body.english-mode .block-en { display: block; } /* Pour les blocs de texte */
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
@@ -64,7 +51,7 @@
         h1, h2, h3 { text-transform: uppercase; letter-spacing: 3px; }
         h2 { font-family: var(--font-subtitles); font-size: 2.5rem; margin-bottom: 2rem; border-left: 4px solid var(--cyan); padding-left: 15px; }
 
-        /* --- NAV --- */
+        /* --- NAV (DESKTOP) --- */
         nav {
             position: fixed; top: 0; width: 100%; height: 80px; padding: 0 2%;
             background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px);
@@ -78,25 +65,21 @@
         .nav-links a { font-family: var(--font-subtitles); font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; color: #aaa; cursor: pointer; }
         .nav-links a:not(.nav-epk-btn):not(.nav-shop-btn):not(.lang-switch):hover { color: var(--white); text-shadow: 0 0 8px var(--cyan); }
 
-        /* Bouton SHOP */
         .nav-shop-btn { color: var(--cyan) !important; border-bottom: 1px solid transparent; }
         .nav-shop-btn:hover { border-bottom: 1px solid var(--cyan); text-shadow: 0 0 10px var(--cyan); }
 
-        /* Bouton Press Kit */
         .nav-epk-btn { border: 1px solid var(--cyan); padding: 8px 15px; color: var(--cyan) !important; transition: 0.3s; }
         .nav-epk-btn:hover { background: var(--cyan); color: var(--black) !important; box-shadow: 0 0 10px var(--cyan); }
 
-        /* Bouton Langue */
-        .lang-switch {
-            border: 1px solid #555; padding: 5px 10px; font-size: 0.7rem !important; color: #fff !important; display: flex; gap: 5px;
-        }
-        .lang-switch:hover { border-color: var(--white); }
+        .lang-switch { border: 1px solid #555; padding: 5px 10px; font-size: 0.7rem !important; color: #fff !important; display: flex; gap: 5px; cursor: pointer; }
         .active-lang { color: var(--cyan); font-weight: 900; }
 
-        /* Réseaux Sociaux */
         .nav-socials { display: flex; gap: 15px; align-items: center; margin-left: 15px; }
         .nav-socials img { width: 22px; height: 22px; opacity: 0.8; transition: 0.3s; filter: invert(1); }
         .nav-socials img:hover { opacity: 1; transform: scale(1.2); }
+
+        /* Hamburger Icon (Hidden on Desktop) */
+        .hamburger { display: none; font-size: 2rem; cursor: pointer; color: var(--white); }
 
         /* --- HERO --- */
         header { height: 100vh; position: relative; overflow: hidden; }
@@ -151,15 +134,54 @@
         .epk-btn { display: inline-block; padding: 15px 40px; border: 2px solid var(--white); color: var(--white); font-family: var(--font-titles); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; background: transparent; }
         .epk-btn:hover { background: var(--white); color: var(--black); box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
 
-        /* --- MOBILE --- */
-        @media (max-width: 1200px) {
-            nav { flex-wrap: wrap; height: auto; padding: 15px; justify-content: center; }
-            .nav-logo { margin-bottom: 15px; width: 100%; text-align: center; }
-            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; width: 100%; margin-bottom: 15px; }
-            .nav-socials { display: flex; gap: 20px; justify-content: center; width: 100%; margin: 0; }
-            h1 { font-size: 2.5rem; }
-            .album-grid { gap: 30px; }
-            .stream-btn { width: 100%; text-align: center; }
+        /* =========================================
+           MOBILE OPTIMIZATION (Max Width 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* MENU HAMBURGER */
+            .hamburger { display: block; }
+            
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0,0,0,0.95);
+                flex-direction: column;
+                padding: 40px 0;
+                border-bottom: 1px solid #333;
+                display: none; /* Caché par défaut */
+            }
+            
+            /* Classe ajoutée par JS pour ouvrir le menu */
+            .nav-links.active { display: flex; }
+            
+            /* On cache les réseaux sociaux dans le menu mobile pour gagner de la place */
+            .nav-socials { display: none; } 
+            
+            /* IMAGES PLUS PETITES (2 Colonnes) */
+            .album-grid { 
+                grid-template-columns: 1fr 1fr; /* 2 par ligne */
+                gap: 15px; 
+                margin-top: 30px;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr 1fr; /* 2 par ligne */
+                gap: 10px;
+            }
+
+            /* TEXTES REDUITS */
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; padding-left: 10px; border-left-width: 3px; }
+            
+            .album-title { font-size: 1rem; } /* Titre album plus petit */
+            .tracklist { display: none; } /* On cache la tracklist sur mobile pour épurer */
+            
+            .section-padding { padding: 60px 5%; } /* Moins de marge sur les côtés */
+            
+            /* Boutons streaming pleine largeur */
+            .stream-btn { width: 100%; text-align: center; padding: 10px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -169,30 +191,34 @@
         <div class="nav-logo">
             <a href="#home"><img src="./logo_sa_02.png" alt="SA Logo"></a>
         </div>
-        <div class="nav-links">
-            <a href="#bio">
+
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#bio" onclick="toggleMenu()">
                 <span class="lang-fr">BIOGRAPHIE</span>
                 <span class="lang-en">BIOGRAPHY</span>
             </a>
-            <a href="#music">
+            <a href="#music" onclick="toggleMenu()">
                 <span class="lang-fr">DISCOGRAPHIE</span>
                 <span class="lang-en">MUSIC</span>
             </a>
-            <a href="#videos">
+            <a href="#videos" onclick="toggleMenu()">
                 <span class="lang-fr">CLIPS</span>
                 <span class="lang-en">VIDEOS</span>
             </a>
-            <a href="#contact">CONTACT</a>
-            <a href="#streaming">STREAMING</a>
+            <a href="#contact" onclick="toggleMenu()">CONTACT</a>
+            <a href="#streaming" onclick="toggleMenu()">STREAMING</a>
             
-            <a href="https://septemberagain.bandcamp.com/merch" target="_blank" class="nav-shop-btn">SHOP</a>
+            <a href="https://septemberagain.bandcamp.com/merch" target="_blank" class="nav-shop-btn" onclick="toggleMenu()">SHOP</a>
             
-            <a href="./SeptemberAgain_EPK.pdf" download class="nav-epk-btn">PRESS KIT</a>
+            <a href="./SeptemberAgain_EPK.pdf" download class="nav-epk-btn" onclick="toggleMenu()">PRESS KIT</a>
 
             <a class="lang-switch" onclick="toggleLanguage()">
                 <span id="btn-fr" class="active-lang">FR</span> | <span id="btn-en">EN</span>
             </a>
         </div>
+
         <div class="nav-socials">
             <a href="https://www.facebook.com/SeptemberAgain" target="_blank"><img src="./social_facebook.png" alt="FB"></a>
             <a href="https://www.instagram.com/september_again/" target="_blank"><img src="./social_instagram.png" alt="IG"></a>
@@ -384,6 +410,7 @@
     </footer>
 
     <script>
+        // SCRIPT LANGUES
         function toggleLanguage() {
             document.body.classList.toggle('english-mode');
             
@@ -397,6 +424,12 @@
                 btnEn.classList.remove('active-lang');
                 btnFr.classList.add('active-lang');
             }
+        }
+
+        // SCRIPT MOBILE MENU (HAMBURGER)
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
         }
     </script>
 
