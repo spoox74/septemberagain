@@ -89,7 +89,6 @@
         
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* IMAGE PC PAR DÉFAUT */
             background-image: url('./hero_03.png');
             background-repeat: no-repeat;
             background-position: center center;
@@ -144,27 +143,36 @@
         @media (max-width: 768px) {
             /* HEADER MOBILE */
             header {
-                /* On remet 100% de la hauteur dispo car on a une image verticale faite pour ça */
                 height: 100vh; 
-                height: 100dvh; /* Gère la barre adresse mobile */
+                height: 100dvh; 
             }
 
             .hero-bg {
-                /* On charge l'image mobile uploadée */
                 background-image: url('./hero_mobile.jpg'); 
-                /* On remet COVER pour que ça remplisse tout l'écran proprement */
                 background-size: cover;
                 background-position: center top;
             }
 
-            /* ON RESTAURE LE FONDU */
             .hero-fade-overlay {
-                height: 35vh; /* Un peu plus haut sur mobile pour bien fondre le bas de l'image */
+                height: 35vh;
                 background: linear-gradient(to bottom, transparent 0%, var(--black) 90%);
             }
 
-            /* MENU HAMBURGER */
-            .hamburger { display: block; padding: 10px; }
+            /* REORGANISATION DE LA BARRE NAV (Flex Order) */
+            .nav-logo { order: 1; }
+            .nav-socials { 
+                display: flex; /* On affiche les réseaux */
+                order: 2; /* Au milieu */
+                margin-left: 15px;
+                margin-right: auto; /* Pousse le burger à droite */
+                gap: 12px; /* Espacement réduit */
+            }
+            .nav-socials img {
+                width: 18px; height: 18px; /* Icones réduites pour mobile */
+            }
+            .hamburger { order: 3; display: block; padding: 10px; }
+
+            /* MENU DÉROULANT */
             .nav-links {
                 position: absolute; top: 80px; left: 0; width: 100%;
                 background-color: rgba(0,0,0,0.98);
@@ -172,30 +180,14 @@
                 border-bottom: 1px solid #333; display: none;
             }
             .nav-links.active { display: flex; }
-            .nav-socials { display: none; } 
             
-            /* RÉDUCTION AGRESSIVE DES TEXTES */
-            h2 { 
-                font-size: 1.5rem; /* Beaucoup plus petit */
-                padding-left: 10px; 
-                border-left-width: 3px; 
-                margin-bottom: 1.5rem;
-            }
-
-            .bio-text {
-                font-size: 0.85rem; /* Texte bio plus petit */
-                line-height: 1.5;
-            }
-            
-            .album-title { font-size: 0.9rem; margin-bottom: 2px; } /* Titre album discret */
+            /* TEXTES */
+            h2 { font-size: 1.5rem; padding-left: 10px; border-left-width: 3px; margin-bottom: 1.5rem; }
+            .bio-text { font-size: 0.85rem; line-height: 1.5; }
+            .album-title { font-size: 0.9rem; margin-bottom: 2px; }
             .album-date { font-size: 0.75rem; }
             .tracklist { display: none; }
-
-            .stream-btn { 
-                width: 100%; text-align: center; 
-                padding: 12px; font-size: 0.9rem; 
-            }
-            
+            .stream-btn { width: 100%; text-align: center; padding: 12px; font-size: 0.9rem; }
             .section-padding { padding: 60px 5%; }
 
             /* LAYOUT */
@@ -357,6 +349,19 @@
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
+
+        // FERMETURE DU MENU AU CLIC EN DEHORS (UX FIX)
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            const isClickInsideMenu = navLinks.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            // Si le menu est ouvert et qu'on ne clique ni dedans ni sur le burger, on ferme
+            if (navLinks.classList.contains('active') && !isClickInsideMenu && !isClickOnHamburger) {
+                navLinks.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
