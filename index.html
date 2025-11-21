@@ -142,7 +142,7 @@
         }
         .form-submit-btn:hover { background: var(--cyan); color: var(--black); box-shadow: 0 0 15px var(--cyan); }
 
-        /* BOITES CONTACTS PROS - FIX EMAIL */
+        /* BOITES CONTACTS PROS */
         .contacts-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
         
         .email-box { 
@@ -151,19 +151,18 @@
             display: inline-block; 
             background: rgba(0,0,0,0.5); 
             width: 100%;
-            max-width: 350px; /* Limite la largeur max */
+            max-width: 350px;
         }
         
         .email-box p { color: #888; font-size: 0.8rem; margin-bottom: 5px; letter-spacing: 1px; }
         
-        /* CSS FIX POUR L'EMAIL SUR UNE LIGNE */
+        /* FIX EMAIL SUR UNE LIGNE */
         .email-box a { 
             color: var(--white); 
             font-weight: bold; 
-            /* Taille adaptive pour que ça rentre toujours */
             font-size: clamp(0.75rem, 3vw, 1rem); 
             display: block;
-            white-space: nowrap; /* Interdit le retour à la ligne */
+            white-space: nowrap; /* Empêche le retour à la ligne */
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -329,7 +328,7 @@
                 <span class="lang-en">CONTACT US</span>
             </h2>
             
-            <form class="contact-form" action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST">
+            <form class="contact-form" action="https://formspree.io/f/mjkzvqok" method="POST">
                 <div class="form-group">
                     <input type="text" name="name" placeholder="NAME" required>
                 </div>
@@ -347,13 +346,13 @@
 
             <div class="contacts-row">
                 <div class="email-box">
-                    <p>BOOKING // PIERRE-MARIE</p>
-                    <a href="mailto:SEPTEMBER.AGAIN@OUTLOOK.FR">SEPTEMBER.AGAIN@OUTLOOK.FR</a>
+                    [cite_start]<p>BOOKING // PIERRE-MARIE [cite: 218]</p>
+                    [cite_start]<a href="mailto:SEPTEMBER.AGAIN@OUTLOOK.FR">SEPTEMBER.AGAIN@OUTLOOK.FR</a> [cite: 219]
                 </div>
                 
                 <div class="email-box">
-                    <p>BAND // LOIC</p>
-                    <a href="mailto:PECCHANUT@HOTMAIL.FR">PECCHANUT@HOTMAIL.FR</a>
+                    [cite_start]<p>BAND // LOIC [cite: 221]</p>
+                    [cite_start]<a href="mailto:PECCHANUT@HOTMAIL.FR">PECCHANUT@HOTMAIL.FR</a> [cite: 222]
                 </div>
             </div>
         </div>
@@ -383,7 +382,6 @@
             navLinks.classList.toggle('active');
         }
 
-        // FERMETURE DU MENU AU CLIC EN DEHORS
         document.addEventListener('click', function(event) {
             const navLinks = document.getElementById('navLinks');
             const hamburger = document.querySelector('.hamburger');
