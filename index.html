@@ -121,7 +121,6 @@
         /* FOOTER & CONTACT */
         footer { background: rgba(0,0,0,0.6); padding: 80px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         
-        /* FORMULAIRE STYLE */
         .contact-form { max-width: 600px; margin: 0 auto 60px auto; text-align: left; }
         .form-group { margin-bottom: 20px; }
         .contact-form input, .contact-form textarea {
@@ -142,7 +141,9 @@
         }
         .form-submit-btn:hover { background: var(--cyan); color: var(--black); box-shadow: 0 0 15px var(--cyan); }
 
-        /* BOITES CONTACTS PROS */
+        /* MESSAGE STATUS (Invisible par défaut) */
+        #my-form-status { width:100%; text-align:center; margin-top:10px; font-weight:bold; color: var(--cyan); font-family: var(--font-titles); letter-spacing: 2px; }
+
         .contacts-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
         
         .email-box { 
@@ -156,13 +157,12 @@
         
         .email-box p { color: #888; font-size: 0.8rem; margin-bottom: 5px; letter-spacing: 1px; }
         
-        /* FIX EMAIL SUR UNE LIGNE */
         .email-box a { 
             color: var(--white); 
             font-weight: bold; 
             font-size: clamp(0.75rem, 3vw, 1rem); 
             display: block;
-            white-space: nowrap; /* Empêche le retour à la ligne */
+            white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -328,7 +328,7 @@
                 <span class="lang-en">CONTACT US</span>
             </h2>
             
-            <form class="contact-form" action="https://formspree.io/f/mjkzvqok" method="POST">
+            <form id="my-form" class="contact-form" action="https://formspree.io/f/mjkzvqok" method="POST">
                 <div class="form-group">
                     <input type="text" name="name" placeholder="NAME" required>
                 </div>
@@ -338,10 +338,11 @@
                 <div class="form-group">
                     <textarea name="message" rows="5" placeholder="MESSAGE" required></textarea>
                 </div>
-                <button type="submit" class="form-submit-btn">
+                <button id="my-form-button" type="submit" class="form-submit-btn">
                     <span class="lang-fr">ENVOYER</span>
                     <span class="lang-en">SEND</span>
                 </button>
+                <p id="my-form-status"></p>
             </form>
 
             <div class="contacts-row">
@@ -364,6 +365,7 @@
     </footer>
 
     <script>
+        // GESTION LANGUES
         function toggleLanguage() {
             document.body.classList.toggle('english-mode');
             const btnFr = document.getElementById('btn-fr');
@@ -377,6 +379,7 @@
             }
         }
 
+        // GESTION MENU MOBILE
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
@@ -392,6 +395,39 @@
                 navLinks.classList.remove('active');
             }
         });
+
+        // GESTION ENVOI FORMULAIRE (AJAX - Invisible)
+        var form = document.getElementById("my-form");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("my-form-status");
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // MESSAGE DE SUCCES (BILINGUE)
+                    status.innerHTML = '<span class="lang-fr">MERCI ! VOTRE MESSAGE A BIEN ÉTÉ ENVOYÉ.</span><span class="lang-en">THANKS! YOUR MESSAGE HAS BEEN SENT.</span>';
+                    form.reset(); // On vide le formulaire
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+                        } else {
+                            status.innerHTML = "Oops! There was a problem submitting your form"
+                        }
+                    })
+                }
+            }).catch(error => {
+                status.innerHTML = "Oops! There was a problem submitting your form"
+            });
+        }
+        form.addEventListener("submit", handleSubmit);
     </script>
 </body>
 </html>
