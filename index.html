@@ -142,11 +142,32 @@
         }
         .form-submit-btn:hover { background: var(--cyan); color: var(--black); box-shadow: 0 0 15px var(--cyan); }
 
-        /* BOITES CONTACTS PROS */
+        /* BOITES CONTACTS PROS - FIX EMAIL */
         .contacts-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
-        .email-box { padding: 20px 30px; border: 1px dashed #444; display: inline-block; background: rgba(0,0,0,0.5); width: 300px; }
+        
+        .email-box { 
+            padding: 20px 30px; 
+            border: 1px dashed #444; 
+            display: inline-block; 
+            background: rgba(0,0,0,0.5); 
+            width: 100%;
+            max-width: 350px; /* Limite la largeur max */
+        }
+        
         .email-box p { color: #888; font-size: 0.8rem; margin-bottom: 5px; letter-spacing: 1px; }
-        .email-box a { color: var(--white); font-weight: bold; font-size: 1rem; word-break: break-all; }
+        
+        /* CSS FIX POUR L'EMAIL SUR UNE LIGNE */
+        .email-box a { 
+            color: var(--white); 
+            font-weight: bold; 
+            /* Taille adaptive pour que ça rentre toujours */
+            font-size: clamp(0.75rem, 3vw, 1rem); 
+            display: block;
+            white-space: nowrap; /* Interdit le retour à la ligne */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
         .email-box a:hover { color: var(--red); }
 
         .epk-container { margin: 40px 0; }
@@ -308,7 +329,7 @@
                 <span class="lang-en">CONTACT US</span>
             </h2>
             
-            <form class="contact-form" action="#" method="POST">
+            <form class="contact-form" action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST">
                 <div class="form-group">
                     <input type="text" name="name" placeholder="NAME" required>
                 </div>
