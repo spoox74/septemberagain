@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SEPTEMBER AGAIN | Official Website</title>
     <meta name="description" content="September Again - Rock Alternatif / Metal / Trip-Hop. Nouvel album Seven Years (2025).">
     
@@ -25,7 +26,6 @@
             --font-text: 'Roboto Mono', monospace;
         }
 
-        /* FONTS LOCALES */
         @font-face { font-family: 'Lovelo'; src: url('./Lovelo-Black.otf') format('opentype'), url('./Lovelo.otf') format('opentype'); font-weight: normal; font-style: normal; }
         @font-face { font-family: 'Farray'; src: url('./Farray.otf') format('opentype'); font-weight: normal; font-style: normal; }
 
@@ -38,9 +38,10 @@
             line-height: 1.6;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent; /* Fix pour mobile */
         }
 
-        /* GESTION DES LANGUES */
+        /* GESTION LANGUES */
         .lang-en { display: none; } 
         body.english-mode .lang-fr { display: none; }
         body.english-mode .lang-en { display: inline; }
@@ -51,7 +52,7 @@
         h1, h2, h3 { text-transform: uppercase; letter-spacing: 3px; }
         h2 { font-family: var(--font-subtitles); font-size: 2.5rem; margin-bottom: 2rem; border-left: 4px solid var(--cyan); padding-left: 15px; }
 
-        /* --- NAV (DESKTOP) --- */
+        /* --- NAV --- */
         nav {
             position: fixed; top: 0; width: 100%; height: 80px; padding: 0 2%;
             background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px);
@@ -78,28 +79,33 @@
         .nav-socials img { width: 22px; height: 22px; opacity: 0.8; transition: 0.3s; filter: invert(1); }
         .nav-socials img:hover { opacity: 1; transform: scale(1.2); }
 
-        /* Hamburger Icon (Hidden on Desktop) */
         .hamburger { display: none; font-size: 2rem; cursor: pointer; color: var(--white); }
 
-        /* --- HERO --- */
-        header { height: 100vh; position: relative; overflow: hidden; }
+        /* --- HERO SECTION (CORRIGÉE) --- */
+        header { 
+            position: relative; 
+            overflow: hidden;
+            /* Hauteur par défaut PC */
+            height: 100vh; 
+        }
+        
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('./hero_03.png') no-repeat center center/cover; z-index: 0;
+            background: url('./hero_03.png') no-repeat center center;
+            background-size: cover; /* Par défaut sur PC: Cover */
+            z-index: 0;
         }
+        
         .hero-fade-overlay {
             position: absolute; bottom: 0; left: 0; width: 100%; height: 30vh;
             background: linear-gradient(to bottom, transparent 0%, var(--black) 100%);
             z-index: 1; pointer-events: none;
         }
 
-        /* --- SECTIONS GENERAL --- */
+        /* --- SECTIONS --- */
         .section-padding { padding: 100px 10%; }
-
-        /* --- BIOGRAPHIE --- */
         .bio-text { font-size: 1rem; max-width: 900px; color: #ddd; text-align: justify; }
 
-        /* --- DISCOGRAPHY --- */
         .album-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; margin-top: 50px; }
         .album-link { display: block; position: relative; }
         .album-card { background: transparent; transition: 0.3s; position: relative; cursor: pointer; }
@@ -110,13 +116,11 @@
         .album-date { font-family: var(--font-text); font-size: 0.9rem; color: #888; font-weight: normal; }
         .tracklist { font-size: 0.8rem; color: #888; min-height: 40px; margin-top: 5px;}
 
-        /* --- STREAMING PLATFORMS --- */
         #streaming { background: #0e0e0e; border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 60px 10%; scroll-margin-top: 80px; }
         .streaming-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
         .stream-btn { font-family: var(--font-titles); font-size: 1.2rem; color: #aaa; border: 1px solid #333; padding: 15px 30px; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
         .stream-btn:hover { color: var(--black); background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan); }
 
-        /* --- CLIPS --- */
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
         .video-link { display: block; position: relative; width: 100%; height: 100%; }
         .video-item { position: relative; overflow: hidden; aspect-ratio: 16/9; cursor: pointer; }
@@ -125,7 +129,6 @@
         .video-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background: linear-gradient(transparent, black); font-family: var(--font-subtitles); font-weight: bold; transform: translateY(100%); transition: 0.3s; pointer-events: none; }
         .video-item:hover .video-overlay { transform: translateY(0); }
 
-        /* --- FOOTER --- */
         footer { background: black; padding: 80px 10%; text-align: center; border-top: 1px solid #222; }
         .email-box { margin-bottom: 40px; padding: 20px; border: 1px dashed #444; display: inline-block; }
         .email-box a { color: var(--white); font-weight: bold; font-size: 1.1rem; }
@@ -138,49 +141,39 @@
            MOBILE OPTIMIZATION (Max Width 768px)
            ========================================= */
         @media (max-width: 768px) {
-            /* MENU HAMBURGER */
-            .hamburger { display: block; }
-            
-            .nav-links {
-                position: absolute;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background-color: rgba(0,0,0,0.95);
-                flex-direction: column;
-                padding: 40px 0;
-                border-bottom: 1px solid #333;
-                display: none; /* Caché par défaut */
-            }
-            
-            /* Classe ajoutée par JS pour ouvrir le menu */
-            .nav-links.active { display: flex; }
-            
-            /* On cache les réseaux sociaux dans le menu mobile pour gagner de la place */
-            .nav-socials { display: none; } 
-            
-            /* IMAGES PLUS PETITES (2 Colonnes) */
-            .album-grid { 
-                grid-template-columns: 1fr 1fr; /* 2 par ligne */
-                gap: 15px; 
-                margin-top: 30px;
-            }
-            
-            .video-grid {
-                grid-template-columns: 1fr 1fr; /* 2 par ligne */
-                gap: 10px;
+            /* BUG FIX MESSENGER : Ajustement Header */
+            header {
+                height: 60vh; /* On réduit la hauteur sur mobile pour que l'image ne soit pas trop étirée */
+                height: 60dvh; /* Unité spéciale pour mobile moderne */
+                min-height: 350px;
             }
 
-            /* TEXTES REDUITS */
+            /* BUG FIX IMAGE : On force l'image à tenir en largeur */
+            .hero-bg {
+                background-size: contain; /* Affiche TOUTE l'image */
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+            /* MENU */
+            .hamburger { display: block; padding: 10px; }
+            .nav-links {
+                position: absolute; top: 80px; left: 0; width: 100%;
+                background-color: rgba(0,0,0,0.98);
+                flex-direction: column; padding: 40px 0;
+                border-bottom: 1px solid #333; display: none;
+            }
+            .nav-links.active { display: flex; }
+            .nav-socials { display: none; } 
+            
+            /* LAYOUT */
+            .album-grid { grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+            .video-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
             h1 { font-size: 2rem; }
             h2 { font-size: 1.8rem; padding-left: 10px; border-left-width: 3px; }
-            
-            .album-title { font-size: 1rem; } /* Titre album plus petit */
-            .tracklist { display: none; } /* On cache la tracklist sur mobile pour épurer */
-            
-            .section-padding { padding: 60px 5%; } /* Moins de marge sur les côtés */
-            
-            /* Boutons streaming pleine largeur */
+            .album-title { font-size: 1rem; }
+            .tracklist { display: none; }
+            .section-padding { padding: 60px 5%; }
             .stream-btn { width: 100%; text-align: center; padding: 10px; font-size: 1rem; }
         }
     </style>
@@ -195,28 +188,14 @@
         <div class="hamburger" onclick="toggleMenu()">☰</div>
 
         <div class="nav-links" id="navLinks">
-            <a href="#bio" onclick="toggleMenu()">
-                <span class="lang-fr">BIOGRAPHIE</span>
-                <span class="lang-en">BIOGRAPHY</span>
-            </a>
-            <a href="#music" onclick="toggleMenu()">
-                <span class="lang-fr">DISCOGRAPHIE</span>
-                <span class="lang-en">MUSIC</span>
-            </a>
-            <a href="#videos" onclick="toggleMenu()">
-                <span class="lang-fr">CLIPS</span>
-                <span class="lang-en">VIDEOS</span>
-            </a>
+            <a href="#bio" onclick="toggleMenu()"><span class="lang-fr">BIOGRAPHIE</span><span class="lang-en">BIOGRAPHY</span></a>
+            <a href="#music" onclick="toggleMenu()"><span class="lang-fr">DISCOGRAPHIE</span><span class="lang-en">MUSIC</span></a>
+            <a href="#videos" onclick="toggleMenu()"><span class="lang-fr">CLIPS</span><span class="lang-en">VIDEOS</span></a>
             <a href="#contact" onclick="toggleMenu()">CONTACT</a>
             <a href="#streaming" onclick="toggleMenu()">STREAMING</a>
-            
             <a href="https://septemberagain.bandcamp.com/merch" target="_blank" class="nav-shop-btn" onclick="toggleMenu()">SHOP</a>
-            
             <a href="./SeptemberAgain_EPK.pdf" download class="nav-epk-btn" onclick="toggleMenu()">PRESS KIT</a>
-
-            <a class="lang-switch" onclick="toggleLanguage()">
-                <span id="btn-fr" class="active-lang">FR</span> | <span id="btn-en">EN</span>
-            </a>
+            <a class="lang-switch" onclick="toggleLanguage()"><span id="btn-fr" class="active-lang">FR</span> | <span id="btn-en">EN</span></a>
         </div>
 
         <div class="nav-socials">
@@ -234,11 +213,7 @@
     </header>
 
     <section id="bio" class="section-padding">
-        <h2>
-            <span class="lang-fr">BIOGRAPHIE</span>
-            <span class="lang-en">BIOGRAPHY</span>
-        </h2>
-        
+        <h2><span class="lang-fr">BIOGRAPHIE</span><span class="lang-en">BIOGRAPHY</span></h2>
         <p class="bio-text lang-fr">
             Né en Haute-Savoie, <strong>September Again</strong> développe depuis plusieurs années un rock alternatif teinté de metal, de trip-hop et d’ambient. 
             <br><br>
@@ -246,7 +221,6 @@
             <br><br>
             Avec <strong>Seven Years</strong>, September Again affine sa signature : des riffs qui tranchent, des mélodies fortes, une tension permanente entre force et vulnérabilité. L’album explore nos fractures intérieures et la manière dont la musique peut absorber, révéler et recoller ce qui reste.
         </p>
-
         <p class="bio-text lang-en">
             Born in the French Alps, <strong>September Again</strong> has been crafting an alternative rock sound infused with metal, trip-hop, and ambient textures for years.
             <br><br>
@@ -257,10 +231,7 @@
     </section>
 
     <section id="music" class="section-padding">
-        <h2>
-            <span class="lang-fr">DISCOGRAPHIE</span>
-            <span class="lang-en">DISCOGRAPHY</span>
-        </h2>
+        <h2><span class="lang-fr">DISCOGRAPHIE</span><span class="lang-en">DISCOGRAPHY</span></h2>
         <div class="album-grid">
             <a href="https://septemberagain.bandcamp.com/album/seven-years-vinyle-digital" target="_blank" class="album-link">
                 <div class="album-card">
@@ -272,7 +243,6 @@
                     <p class="tracklist">Mirrors // Twisted // Caged // Distorted n Sweet // Cyan...</p>
                 </div>
             </a>
-
             <a href="https://septemberagain.bandcamp.com/album/from-nothing-to-nowhere" target="_blank" class="album-link">
                 <div class="album-card">
                     <img src="./from_nothing_to_nowhere.jpg" alt="From Nothing to Nowhere Cover" class="album-cover">
@@ -283,7 +253,6 @@
                     <p class="tracklist">Pretentious // Clarity // Circles // Fragment...</p>
                 </div>
             </a>
-
             <a href="https://septemberagain.bandcamp.com/album/insomniac" target="_blank" class="album-link">
                 <div class="album-card">
                     <img src="./insomniac.jpg" alt="Insomniac Cover" class="album-cover">
@@ -298,10 +267,7 @@
     </section>
 
     <section id="streaming">
-        <h2 style="text-align: center; border: none; padding: 0;">
-            <span class="lang-fr">PLATEFORMES DIGITALES</span>
-            <span class="lang-en">DIGITAL PLATFORMS</span>
-        </h2>
+        <h2 style="text-align: center; border: none; padding: 0;"><span class="lang-fr">PLATEFORMES DIGITALES</span><span class="lang-en">DIGITAL PLATFORMS</span></h2>
         <div class="streaming-list">
             <a href="https://play.qobuz.com/artist/3031191" target="_blank" class="stream-btn">Qobuz</a>
             <a href="https://www.deezer.com/fr/artist/11288106" target="_blank" class="stream-btn">Deezer</a>
@@ -312,73 +278,17 @@
     </section>
 
     <section id="videos" class="section-padding">
-        <h2>
-            <span class="lang-fr">CLIPS</span>
-            <span class="lang-en">MUSIC VIDEOS</span>
-        </h2>
+        <h2><span class="lang-fr">CLIPS</span><span class="lang-en">MUSIC VIDEOS</span></h2>
         <div class="video-grid">
-            <div class="video-item">
-                <a href="https://youtu.be/rx_E5btTirc" target="_blank" class="video-link">
-                    <img src="https://img.youtube.com/vi/rx_E5btTirc/maxresdefault.jpg" alt="Out Of Words">
-                    <div class="video-overlay">OUT OF WORDS</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://www.youtube.com/watch?v=2Lq1h47QWhE" target="_blank" class="video-link">
-                    <img src="./thumb_mirrors.png" alt="Mirrors">
-                    <div class="video-overlay">MIRRORS</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://www.youtube.com/watch?v=SA9sbUJOWD0" target="_blank" class="video-link">
-                    <img src="./thumb_twisted.png" alt="Twisted">
-                    <div class="video-overlay">TWISTED</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://youtu.be/IrfZR0SW34k" target="_blank" class="video-link">
-                    <img src="./thumb_Caged.png" alt="Caged">
-                    <div class="video-overlay">CAGED</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://youtu.be/1brwj5MbLoY" target="_blank" class="video-link">
-                    <img src="./thumb_DistortedNSweet.png" alt="Distorted N Sweet">
-                    <div class="video-overlay">DISTORTED N SWEET</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://youtu.be/fYSDNC6ReLA" target="_blank" class="video-link">
-                    <img src="./thumb_cyan.png" alt="Cyan">
-                    <div class="video-overlay">CYAN</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://youtu.be/KK2kCKsIaGk" target="_blank" class="video-link">
-                    <img src="./thumb_InWhichIFade.png" alt="In Which I Fade">
-                    <div class="video-overlay">IN WHICH I FADE</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://youtu.be/YA_LDhFWPqM" target="_blank" class="video-link">
-                    <img src="./thumb_prizm.png" alt="Prizm">
-                    <div class="video-overlay">PRIZM</div>
-                </a>
-            </div>
-
-            <div class="video-item">
-                <a href="https://youtu.be/LLh2WisOAJM" target="_blank" class="video-link">
-                    <img src="./thumb_ThisCurse.png" alt="This Curse">
-                    <div class="video-overlay">THIS CURSE</div>
-                </a>
-            </div>
+            <div class="video-item"><a href="https://youtu.be/rx_E5btTirc" target="_blank" class="video-link"><img src="https://img.youtube.com/vi/rx_E5btTirc/maxresdefault.jpg" alt="Out Of Words"><div class="video-overlay">OUT OF WORDS</div></a></div>
+            <div class="video-item"><a href="https://www.youtube.com/watch?v=2Lq1h47QWhE" target="_blank" class="video-link"><img src="./thumb_mirrors.png" alt="Mirrors"><div class="video-overlay">MIRRORS</div></a></div>
+            <div class="video-item"><a href="https://www.youtube.com/watch?v=SA9sbUJOWD0" target="_blank" class="video-link"><img src="./thumb_twisted.png" alt="Twisted"><div class="video-overlay">TWISTED</div></a></div>
+            <div class="video-item"><a href="https://youtu.be/IrfZR0SW34k" target="_blank" class="video-link"><img src="./thumb_Caged.png" alt="Caged"><div class="video-overlay">CAGED</div></a></div>
+            <div class="video-item"><a href="https://youtu.be/1brwj5MbLoY" target="_blank" class="video-link"><img src="./thumb_DistortedNSweet.png" alt="Distorted N Sweet"><div class="video-overlay">DISTORTED N SWEET</div></a></div>
+            <div class="video-item"><a href="https://youtu.be/fYSDNC6ReLA" target="_blank" class="video-link"><img src="./thumb_cyan.png" alt="Cyan"><div class="video-overlay">CYAN</div></a></div>
+            <div class="video-item"><a href="https://youtu.be/KK2kCKsIaGk" target="_blank" class="video-link"><img src="./thumb_InWhichIFade.png" alt="In Which I Fade"><div class="video-overlay">IN WHICH I FADE</div></a></div>
+            <div class="video-item"><a href="https://youtu.be/YA_LDhFWPqM" target="_blank" class="video-link"><img src="./thumb_prizm.png" alt="Prizm"><div class="video-overlay">PRIZM</div></a></div>
+            <div class="video-item"><a href="https://youtu.be/LLh2WisOAJM" target="_blank" class="video-link"><img src="./thumb_ThisCurse.png" alt="This Curse"><div class="video-overlay">THIS CURSE</div></a></div>
         </div>
     </section>
 
@@ -397,26 +307,17 @@
                  <p>+33 6 85 86 17 48</p>
             </div>
         </div>
-        
         <div class="epk-container">
-            <a href="./SeptemberAgain_EPK.pdf" download class="epk-btn">
-                ⬇ DOWNLOAD PRESS KIT (PDF)
-            </a>
+            <a href="./SeptemberAgain_EPK.pdf" download class="epk-btn">⬇ DOWNLOAD PRESS KIT (PDF)</a>
         </div>
-
-        <p style="margin-top:50px; font-size:0.7rem; color:#555;">
-            &copy; 2025 SEPTEMBER AGAIN. DESIGNED BY THE SHATTERED REFLECTION.
-        </p>
+        <p style="margin-top:50px; font-size:0.7rem; color:#555;">&copy; 2025 SEPTEMBER AGAIN. DESIGNED BY THE SHATTERED REFLECTION.</p>
     </footer>
 
     <script>
-        // SCRIPT LANGUES
         function toggleLanguage() {
             document.body.classList.toggle('english-mode');
-            
             const btnFr = document.getElementById('btn-fr');
             const btnEn = document.getElementById('btn-en');
-            
             if (document.body.classList.contains('english-mode')) {
                 btnFr.classList.remove('active-lang');
                 btnEn.classList.add('active-lang');
@@ -426,12 +327,10 @@
             }
         }
 
-        // SCRIPT MOBILE MENU (HAMBURGER)
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
     </script>
-
 </body>
 </html>
