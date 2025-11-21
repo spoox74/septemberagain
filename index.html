@@ -47,7 +47,7 @@
         body.english-mode .lang-fr { display: none; }
         body.english-mode .lang-en { display: inline; }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
         ul { list-style: none; }
 
         h1, h2, h3 { text-transform: uppercase; letter-spacing: 3px; }
@@ -140,38 +140,56 @@
             cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;
         }
         .form-submit-btn:hover { background: var(--cyan); color: var(--black); box-shadow: 0 0 15px var(--cyan); }
-
-        /* MESSAGE STATUS (Invisible par défaut) */
         #my-form-status { width:100%; text-align:center; margin-top:10px; font-weight:bold; color: var(--cyan); font-family: var(--font-titles); letter-spacing: 2px; }
 
         .contacts-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
-        
-        .email-box { 
-            padding: 20px 30px; 
-            border: 1px dashed #444; 
-            display: inline-block; 
-            background: rgba(0,0,0,0.5); 
-            width: 100%;
-            max-width: 350px;
-        }
-        
+        .email-box { padding: 20px 30px; border: 1px dashed #444; display: inline-block; background: rgba(0,0,0,0.5); width: 100%; max-width: 350px; }
         .email-box p { color: #888; font-size: 0.8rem; margin-bottom: 5px; letter-spacing: 1px; }
-        
-        .email-box a { 
-            color: var(--white); 
-            font-weight: bold; 
-            font-size: clamp(0.75rem, 3vw, 1rem); 
-            display: block;
-            white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
+        .email-box a { color: var(--white); font-weight: bold; font-size: clamp(0.75rem, 3vw, 1rem); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .email-box a:hover { color: var(--red); }
 
         .epk-container { margin: 40px 0; }
-        .epk-btn { display: inline-block; padding: 15px 40px; border: 2px solid var(--white); color: var(--white); font-family: var(--font-titles); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; background: transparent; }
+        .epk-btn { display: inline-block; padding: 15px 40px; border: 2px solid var(--white); color: var(--white); font-family: var(--font-titles); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; background: transparent; cursor: pointer; }
         .epk-btn:hover { background: var(--white); color: var(--black); box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+
+        /* --- PASSWORD MODAL (POPUP) --- */
+        .modal-overlay {
+            display: none; /* Caché par défaut */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #0a0a0a;
+            border: 1px solid var(--cyan);
+            padding: 40px;
+            text-align: center;
+            max-width: 450px; width: 90%;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            position: relative;
+        }
+        .modal-title { font-family: var(--font-titles); font-size: 1.5rem; margin-bottom: 20px; color: var(--white); }
+        .modal-input {
+            width: 100%; padding: 15px;
+            background: #111; border: 1px solid #333;
+            color: var(--cyan); font-family: var(--font-text); text-align: center; font-size: 1.2rem;
+            margin-bottom: 20px; outline: none; letter-spacing: 2px;
+        }
+        .modal-input:focus { border-color: var(--cyan); }
+        .modal-submit {
+            background: var(--cyan); border: none;
+            color: var(--black); font-family: var(--font-titles); font-weight: bold;
+            padding: 10px 30px; font-size: 1rem; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .modal-close {
+            position: absolute; top: 10px; right: 15px;
+            color: #555; font-size: 1.5rem; cursor: pointer;
+        }
+        .modal-close:hover { color: var(--white); }
+        .error-msg { color: var(--red); font-size: 0.8rem; margin-top: 15px; display: none; font-family: var(--font-text); }
 
         /* =========================================
            MOBILE OPTIMIZATION
@@ -224,7 +242,7 @@
             <a href="#contact" onclick="toggleMenu()">CONTACT</a>
             <a href="#streaming" onclick="toggleMenu()">STREAMING</a>
             <a href="https://septemberagain.bandcamp.com/merch" target="_blank" class="nav-shop-btn" onclick="toggleMenu()">SHOP</a>
-            <a href="./SeptemberAgain_EPK.pdf" download class="nav-epk-btn" onclick="toggleMenu()">PRESS KIT</a>
+            <a onclick="openEpkModal(event)" class="nav-epk-btn">PRESS KIT</a>
             <a class="lang-switch" onclick="toggleLanguage()"><span id="btn-fr" class="active-lang">FR</span> | <span id="btn-en">EN</span></a>
         </div>
 
@@ -359,10 +377,29 @@
         </div>
 
         <div class="epk-container">
-            <a href="./SeptemberAgain_EPK.pdf" download class="epk-btn">⬇ DOWNLOAD PRESS KIT (PDF)</a>
+            <a onclick="openEpkModal(event)" class="epk-btn">⬇ DOWNLOAD PRESS KIT (PDF)</a>
         </div>
         <p style="margin-top:50px; font-size:0.7rem; color:#555;">&copy; 2025 SEPTEMBER AGAIN. DESIGNED BY THE SHATTERED REFLECTION.</p>
     </footer>
+
+    <div id="epk-modal" class="modal-overlay" onclick="closeEpkModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-close" onclick="closeEpkModal(event)">&times;</div>
+            <div class="modal-title">
+                <span class="lang-fr">ACCÈS PRO</span>
+                <span class="lang-en">PRO ACCESS</span>
+            </div>
+            <input type="password" id="epk-password" class="modal-input" placeholder="PASSWORD">
+            <button onclick="checkPassword()" class="modal-submit">
+                <span class="lang-fr">VALIDER</span>
+                <span class="lang-en">ENTER</span>
+            </button>
+            <p id="error-msg" class="error-msg">
+                <span class="lang-fr">Mot de passe incorrect</span>
+                <span class="lang-en">Incorrect password</span>
+            </p>
+        </div>
+    </div>
 
     <script>
         // GESTION LANGUES
@@ -396,9 +433,8 @@
             }
         });
 
-        // GESTION ENVOI FORMULAIRE (AJAX - Invisible)
+        // GESTION ENVOI FORMULAIRE (AJAX)
         var form = document.getElementById("my-form");
-        
         async function handleSubmit(event) {
             event.preventDefault();
             var status = document.getElementById("my-form-status");
@@ -406,28 +442,54 @@
             fetch(event.target.action, {
                 method: form.method,
                 body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
-                    // MESSAGE DE SUCCES (BILINGUE)
-                    status.innerHTML = '<span class="lang-fr">MERCI ! VOTRE MESSAGE A BIEN ÉTÉ ENVOYÉ.</span><span class="lang-en">THANKS! YOUR MESSAGE HAS BEEN SENT.</span>';
-                    form.reset(); // On vide le formulaire
+                    status.innerHTML = '<span class="lang-fr">MERCI ! MESSAGE ENVOYÉ.</span><span class="lang-en">THANKS! MESSAGE SENT.</span>';
+                    form.reset();
                 } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-                        } else {
-                            status.innerHTML = "Oops! There was a problem submitting your form"
-                        }
-                    })
+                    status.innerHTML = "Oops! Error.";
                 }
-            }).catch(error => {
-                status.innerHTML = "Oops! There was a problem submitting your form"
-            });
+            }).catch(error => { status.innerHTML = "Oops! Error."; });
         }
         form.addEventListener("submit", handleSubmit);
+
+        // GESTION MODAL PASSWORD
+        function openEpkModal(event) {
+            if(event) event.preventDefault();
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks.classList.contains('active')) { navLinks.classList.remove('active'); }
+            document.getElementById('epk-modal').style.display = 'flex';
+        }
+
+        function closeEpkModal(event) {
+            document.getElementById('epk-modal').style.display = 'none';
+            document.getElementById('error-msg').style.display = 'none';
+            document.getElementById('epk-password').value = '';
+        }
+
+        function checkPassword() {
+            var password = document.getElementById('epk-password').value;
+            if (password === "SeptemberAgain2025") {
+                var link = document.createElement('a');
+                link.href = './SeptemberAgain_EPK.pdf';
+                link.download = 'SeptemberAgain_EPK.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                closeEpkModal();
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+        
+        // Trigger password check on Enter key
+        document.getElementById("epk-password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
     </script>
 </body>
 </html>
