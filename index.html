@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SEPTEMBER AGAIN | Official Website</title>
     <meta name="description" content="September Again - Rock Alternatif / Metal / Trip-Hop. Nouvel album Seven Years (2025).">
     
@@ -38,7 +37,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent; /* Fix pour mobile */
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* GESTION LANGUES */
@@ -81,18 +80,20 @@
 
         .hamburger { display: none; font-size: 2rem; cursor: pointer; color: var(--white); }
 
-        /* --- HERO SECTION (CORRIGÉE) --- */
+        /* --- HERO SECTION --- */
         header { 
             position: relative; 
             overflow: hidden;
-            /* Hauteur par défaut PC */
             height: 100vh; 
         }
         
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('./hero_03.png') no-repeat center center;
-            background-size: cover; /* Par défaut sur PC: Cover */
+            /* IMAGE PC PAR DÉFAUT */
+            background-image: url('./hero_03.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
             z-index: 0;
         }
         
@@ -141,21 +142,28 @@
            MOBILE OPTIMIZATION (Max Width 768px)
            ========================================= */
         @media (max-width: 768px) {
-            /* BUG FIX MESSENGER : Ajustement Header */
+            /* HEADER MOBILE */
             header {
-                height: 60vh; /* On réduit la hauteur sur mobile pour que l'image ne soit pas trop étirée */
-                height: 60dvh; /* Unité spéciale pour mobile moderne */
-                min-height: 350px;
+                /* On remet 100% de la hauteur dispo car on a une image verticale faite pour ça */
+                height: 100vh; 
+                height: 100dvh; /* Gère la barre adresse mobile */
             }
 
-            /* BUG FIX IMAGE : On force l'image à tenir en largeur */
             .hero-bg {
-                background-size: contain; /* Affiche TOUTE l'image */
-                background-position: center center;
-                background-repeat: no-repeat;
+                /* On charge l'image mobile uploadée */
+                background-image: url('./hero_mobile.jpg'); 
+                /* On remet COVER pour que ça remplisse tout l'écran proprement */
+                background-size: cover;
+                background-position: center top;
             }
 
-            /* MENU */
+            /* ON RESTAURE LE FONDU */
+            .hero-fade-overlay {
+                height: 35vh; /* Un peu plus haut sur mobile pour bien fondre le bas de l'image */
+                background: linear-gradient(to bottom, transparent 0%, var(--black) 90%);
+            }
+
+            /* MENU HAMBURGER */
             .hamburger { display: block; padding: 10px; }
             .nav-links {
                 position: absolute; top: 80px; left: 0; width: 100%;
@@ -166,15 +174,33 @@
             .nav-links.active { display: flex; }
             .nav-socials { display: none; } 
             
-            /* LAYOUT */
-            .album-grid { grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
-            .video-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.8rem; padding-left: 10px; border-left-width: 3px; }
-            .album-title { font-size: 1rem; }
+            /* RÉDUCTION AGRESSIVE DES TEXTES */
+            h2 { 
+                font-size: 1.5rem; /* Beaucoup plus petit */
+                padding-left: 10px; 
+                border-left-width: 3px; 
+                margin-bottom: 1.5rem;
+            }
+
+            .bio-text {
+                font-size: 0.85rem; /* Texte bio plus petit */
+                line-height: 1.5;
+            }
+            
+            .album-title { font-size: 0.9rem; margin-bottom: 2px; } /* Titre album discret */
+            .album-date { font-size: 0.75rem; }
             .tracklist { display: none; }
+
+            .stream-btn { 
+                width: 100%; text-align: center; 
+                padding: 12px; font-size: 0.9rem; 
+            }
+            
             .section-padding { padding: 60px 5%; }
-            .stream-btn { width: 100%; text-align: center; padding: 10px; font-size: 1rem; }
+
+            /* LAYOUT */
+            .album-grid { grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+            .video-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
         }
     </style>
 </head>
